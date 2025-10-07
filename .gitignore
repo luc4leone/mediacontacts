@@ -1,0 +1,16 @@
+# Generated HTML files
+SPEC.html
+*.html
+
+# Node modules (if you add npm later)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

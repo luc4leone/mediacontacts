@@ -1,31 +1,57 @@
 # SPEC DI ALTO LIVELLO - MediaContacts
 
-## 1. Overview del Progetto
+## 1. Glossario Termini
 
-### 1.1 Descrizione Generale
+**Comunicato Stampa**: Testo redatto dall'ufficio stampa per informare su un fatto oppure su un avvenimento in maniera ufficiale (testo, immagini, allegati)
+
+**Spedizione**: L'atto di inviare un comunicato stampa a una lista di giornalisti
+
+**Lista/Mailing List**: Insieme di contatti giornalisti selezionati per una spedizione
+
+**Media Kit**: Insieme di allegati associati a un comunicato
+
+**Progetto**: Contenitore che raggruppa comunicati e rassegna stampa per un cliente/campagna
+
+**Rassegna Stampa**: Collezione di articoli pubblicati in risposta a comunicati
+
+**Word Cloud**: Visualizzazione grafica delle parole più frequenti negli articoli di un giornalista
+
+**Bounce**: Email non consegnata (indirizzo errato, casella piena, ecc.)
+
+**Friendliness**: Indice di reattività di un giornalista ai comunicati ricevuti
+
+**Ospite**: Tipo di utente con accesso limitato (solo visualizzazione progetti). È il cliente dell'ufficio stampa
+
+**To-Do**: Task/attività da completare
+
+---
+
+## 2. Overview del Progetto
+
+### 2.1 Descrizione Generale
 
 MediaContacts è una web application responsive progettata per semplificare e ottimizzare il lavoro degli uffici stampa, comunicatori e professionisti delle PR nella creazione e gestione di liste di contatti giornalistici e nell'invio di comunicati stampa.
 
-### 1.2 Obiettivo Principale
+### 2.2 Obiettivo Principale
 
 Permettere agli utenti di creare liste mirate di giornalisti attingendo da un database professionale costantemente aggiornato, e gestire l'invio di comunicati stampa con funzionalità anti-spam e tracking avanzato.
 
-### 1.3 Utenti Target
+### 2.3 Utenti Target
 
 - Addetti all'ufficio stampa
 - Comunicatori
 - Professionisti delle PR
 - Agenzie di comunicazione
 
-### 1.4 Mercato di Riferimento
+### 2.4 Mercato di Riferimento
 
 Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ---
 
-## 2. Tipologie di Utenti e Permessi
+## 3. Tipologie di Utenti e Permessi
 
-### 2.1 Amministratore
+### 3.1 Amministratore
 
 **Capacità:**
 
@@ -39,7 +65,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Non può impostare limiti specifici per singolo utente
 - Non vede i to-do personali degli altri utenti
 
-### 2.2 Utente Standard
+### 3.2 Utente Standard
 
 **Capacità:**
 
@@ -57,7 +83,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Non può vedere tutte le liste create da altri utenti
 - Tutti gli utenti standard hanno lo stesso livello di permessi
 
-### 2.3 Ospite (Cliente)
+### 3.3 Ospite (Cliente)
 
 **Capacità:**
 
@@ -71,7 +97,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Nessuna possibilità di modificare, commentare o approvare
 - Accesso limitato solo ai progetti specificamente assegnati
 
-### 2.4 Gestione Account
+### 3.4 Gestione Account
 
 - Registrazione: non autonoma, solo tramite creazione da parte dell'amministratore via back office
 - Credenziali: rilasciate dall'azienda all'amministratore
@@ -81,9 +107,9 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ---
 
-## 3. Funzionalità Core (MVP)
+## 4. Funzionalità Core (MVP)
 
-### 3.1 Priorità Assoluta
+### 4.1 Priorità Assoluta
 
 1. **Creazione di mailing list con filtri avanzati**
 
@@ -100,7 +126,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
    - Editor interno per creare comunicati
    - Possibilità di caricare comunicati esterni (PDF)
 
-### 3.2 Funzionalità Essenziali Aggiuntive
+### 4.2 Funzionalità Essenziali Aggiuntive
 
 - Gestione e riutilizzo di liste precedenti
 - Tracking e statistiche degli invii
@@ -109,9 +135,9 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ---
 
-## 4. Gestione Database Giornalisti
+## 5. Gestione Database Giornalisti
 
-### 4.1 Struttura Dati Giornalista
+### 5.1 Struttura Dati Giornalista
 
 **Informazioni principali:**
 
@@ -140,7 +166,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 - Note personali private dell'utente
 
-### 4.2 Relazioni tra Entità
+### 5.2 Relazioni tra Entità
 
 **Giornalista ↔ Testata ↔ Redazione:**
 
@@ -155,7 +181,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Organigramma dal direttore responsabile al semplice redattore
 - Rappresentata attraverso i ruoli
 
-### 4.3 Ruoli Giornalisti
+### 5.3 Ruoli Giornalisti
 
 Lista ruoli (non esaustiva):
 
@@ -181,7 +207,7 @@ Lista ruoli (non esaustiva):
 - Direttore tecnico
 - Altri
 
-### 4.4 Argomenti e Categorie
+### 5.4 Argomenti e Categorie
 
 **Macro-categorie:**
 
@@ -233,7 +259,7 @@ Lista ruoli (non esaustiva):
 
 _Nota: Ogni macro-categoria ha le proprie sotto-categorie specifiche_
 
-### 4.5 Criteri di Filtro Giornalisti
+### 5.5 Criteri di Filtro Giornalisti
 
 Gli utenti possono filtrare i giornalisti secondo:
 
@@ -252,7 +278,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 - Gli utenti possono salvare combinazioni di filtri per riutilizzarle
 - Per escludere elementi specifici: selezionare tutti tranne quello da escludere
 
-### 4.6 Ricerca Giornalisti
+### 5.6 Ricerca Giornalisti
 
 **Campi visualizzati nei risultati:**
 
@@ -269,7 +295,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 - Selezione multipla
 - Aggiunta di tutti i risultati filtrati
 
-### 4.7 Word Cloud
+### 5.7 Word Cloud
 
 **Caratteristiche:**
 
@@ -283,7 +309,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 - Aggiornamento ogni ~5 nuovi articoli disponibili
 - Fonte dati: piattaforma di rassegna stampa integrata
 
-### 4.8 Aggiornamento Database
+### 5.8 Aggiornamento Database
 
 **Frequenza:**
 
@@ -302,7 +328,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 - Richiesta aggiunta di giornalisti non presenti
 - Sistema di segnalazione integrato nell'applicazione
 
-### 4.9 Gestione Duplicati
+### 5.9 Gestione Duplicati
 
 **Durante aggiunta manuale:**
 
@@ -313,9 +339,9 @@ Gli utenti possono filtrare i giornalisti secondo:
 
 ---
 
-## 5. Gestione Testate Giornalistiche
+## 6. Gestione Testate Giornalistiche
 
-### 5.1 Informazioni Testata
+### 6.1 Informazioni Testata
 
 **Dati principali:**
 
@@ -346,7 +372,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 
 - Note personali dell'utente
 
-### 5.2 Tipo di Media
+### 6.2 Tipo di Media
 
 Categorie disponibili:
 
@@ -356,16 +382,16 @@ Categorie disponibili:
 - Radio
 - TV
 
-### 5.3 Contatti Redazione
+### 6.3 Contatti Redazione
 
 - Contatti generici di redazione (email generale, centralino)
 - Elenco dettagliato giornalisti con contatti individuali
 
 ---
 
-## 6. Gestione Liste
+## 7. Gestione Liste
 
-### 6.1 Creazione Liste
+### 7.1 Creazione Liste
 
 **Modalità di creazione:**
 
@@ -389,7 +415,7 @@ Categorie disponibili:
 4. **Duplicazione**
    - Possibilità di duplicare liste esistenti come base per nuove liste
 
-### 6.2 Modifica Liste
+### 7.2 Modifica Liste
 
 **Operazioni possibili:**
 
@@ -408,7 +434,7 @@ Categorie disponibili:
 - Non viene mantenuta cronologia completa delle modifiche
 - Non viene tracciato chi ha modificato (solo chi ha creato)
 
-### 6.3 Salvataggio e Organizzazione
+### 7.3 Salvataggio e Organizzazione
 
 **Attributi lista:**
 
@@ -422,7 +448,7 @@ Categorie disponibili:
 - Tutte le liste allo stesso livello (no cartelle)
 - No sistema di tag/etichette (da valutare in futuro)
 
-### 6.4 Condivisione e Visibilità
+### 7.4 Condivisione e Visibilità
 
 **Livello amministratore:**
 
@@ -441,21 +467,21 @@ Categorie disponibili:
 - Non prevista tramite link
 - Solo tramite export
 
-### 6.5 Cancellazione
+### 7.5 Cancellazione
 
 - Le liste eliminate sono cancellate definitivamente
 - Nessun cestino o recupero possibile
 - Richiesta attenzione all'utente prima della cancellazione
 
-### 6.6 Limiti
+### 7.6 Limiti
 
 - Nessun limite al numero di giornalisti per lista
 
 ---
 
-## 7. Import/Export Liste
+## 8. Import/Export Liste
 
-### 7.1 Import
+### 8.1 Import
 
 **Formato:**
 
@@ -477,7 +503,7 @@ Categorie disponibili:
 
 - Alert per potenziali duplicati durante import
 
-### 7.2 Export
+### 8.2 Export
 
 **Formato:**
 
@@ -489,9 +515,9 @@ Categorie disponibili:
 
 ---
 
-## 8. Gestione Comunicati
+## 9. Gestione Comunicati
 
-### 8.1 Creazione Comunicato
+### 9.1 Creazione Comunicato
 
 **Modalità:**
 
@@ -510,7 +536,7 @@ Categorie disponibili:
 - Corpo del messaggio (HTML)
 - Media kit (allegati)
 
-### 8.2 Media Kit e Allegati
+### 9.2 Media Kit e Allegati
 
 **Tipologie supportate:**
 
@@ -524,14 +550,14 @@ Categorie disponibili:
 - Possibilità di riutilizzare allegati da comunicati precedenti
 - Libreria media centralizzata (da valutare implementazione)
 
-### 8.3 Template
+### 9.3 Template
 
 **Disponibilità:**
 
 - Template preimpostati disponibili
 - Template personalizzabili dall'utente/organizzazione
 
-### 8.4 Personalizzazione e Branding
+### 9.4 Personalizzazione e Branding
 
 **Firma email:**
 
@@ -547,7 +573,7 @@ Categorie disponibili:
 - Possibilità di usare titolo o creare oggetto diverso
 - Tipicamente coincidono ma deve esserci flessibilità
 
-### 8.5 Gestione Bozze
+### 9.5 Gestione Bozze
 
 **Salvataggio:**
 
@@ -559,12 +585,12 @@ Categorie disponibili:
 - Solo le bozze possono essere eliminate
 - Comunicati inviati non eliminabili (restano in storico)
 
-### 8.6 Duplicazione
+### 9.6 Duplicazione
 
 - Possibilità di duplicare comunicati esistenti come punto di partenza
 - Utile per comunicati simili o ricorrenti
 
-### 8.7 Versioni Multiple
+### 9.7 Versioni Multiple
 
 **Personalizzazione avanzata:**
 
@@ -573,7 +599,7 @@ Categorie disponibili:
 - Personalizzazione messaggi per singoli destinatari o gruppi
 - Funzionalità distinta dalla semplice duplicazione
 
-### 8.8 Anteprima
+### 9.8 Anteprima
 
 **Funzionalità:**
 
@@ -583,16 +609,16 @@ Categorie disponibili:
 
 ---
 
-## 9. Invio Comunicati (Spedizioni)
+## 10. Invio Comunicati (Spedizioni)
 
-### 9.1 Terminologia
+### 10.1 Terminologia
 
 **Importante:** Distinzione tra:
 
 - **Comunicato**: il contenuto del messaggio
 - **Spedizione/Invio**: l'atto di inviare il comunicato a una lista
 
-### 9.2 Configurazione Invio
+### 10.2 Configurazione Invio
 
 **Parametri obbligatori:**
 
@@ -612,7 +638,7 @@ Categorie disponibili:
 - Coincide con il mittente
 - Risposte dei giornalisti arrivano all'indirizzo mittente
 
-### 9.3 Schermata di Riepilogo/Conferma
+### 10.3 Schermata di Riepilogo/Conferma
 
 Prima dell'invio definitivo:
 
@@ -622,7 +648,7 @@ Prima dell'invio definitivo:
 - Anteprima comunicato
 - Conferma esplicita richiesta
 
-### 9.4 Test Invio
+### 10.4 Test Invio
 
 **Funzionalità:**
 
@@ -630,7 +656,7 @@ Prima dell'invio definitivo:
 - A se stessi o a indirizzi specifici
 - Verifica deliverability e formattazione
 
-### 9.5 Modalità di Invio
+### 10.5 Modalità di Invio
 
 **Tramite piattaforma (consigliato):**
 
@@ -644,7 +670,7 @@ Prima dell'invio definitivo:
 - Possibile ma non consigliato per liste numerose
 - Maggior rischio spam
 
-### 9.6 Programmazione Invio
+### 10.6 Programmazione Invio
 
 **Scheduling:**
 
@@ -656,7 +682,7 @@ Prima dell'invio definitivo:
 
 - Notifica quando spedizione programmata viene eseguita con successo
 
-### 9.7 Processo di Invio
+### 10.7 Processo di Invio
 
 **Caratteristiche:**
 
@@ -668,7 +694,7 @@ Prima dell'invio definitivo:
 
 - Non è possibile interrompere un invio in corso (versione iniziale)
 
-### 9.8 Gestione Errori
+### 10.8 Gestione Errori
 
 **Monitoraggio:**
 
@@ -684,9 +710,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 10. Statistiche e Tracking
+## 11. Statistiche e Tracking
 
-### 10.1 Metriche Disponibili
+### 11.1 Metriche Disponibili
 
 **Metriche principali:**
 
@@ -696,7 +722,7 @@ Prima dell'invio definitivo:
 - Unsubscribe (quando possibile)
 - Tempo di lettura (quando possibile)
 
-### 10.2 Livello di Dettaglio
+### 11.2 Livello di Dettaglio
 
 **Per singola spedizione:**
 
@@ -710,11 +736,11 @@ Prima dell'invio definitivo:
 - Non esiste vista aggregata/comparativa (versione iniziale)
 - Non è possibile confrontare performance di spedizioni diverse
 
-### 10.3 Export Statistiche
+### 11.3 Export Statistiche
 
 - Non previsto nella versione iniziale
 
-### 10.4 Storico Contatti Giornalista
+### 11.4 Storico Contatti Giornalista
 
 **Nella scheda giornalista:**
 
@@ -725,9 +751,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 11. Progetti e Cliente Ospite
+## 12. Progetti e Cliente Ospite
 
-### 11.1 Struttura Progetto
+### 12.1 Struttura Progetto
 
 **Un progetto contiene:**
 
@@ -741,12 +767,12 @@ Prima dell'invio definitivo:
 - Visibilità per il cliente finale
 - Dimostrazione ROI delle attività PR
 
-### 11.2 Durata Progetti
+### 12.2 Durata Progetti
 
 - Progetti aperti (nessuna durata predefinita)
 - Non vincolati a periodi specifici
 
-### 11.3 Rassegna Stampa
+### 12.3 Rassegna Stampa
 
 **Composizione:**
 
@@ -765,7 +791,7 @@ Prima dell'invio definitivo:
 - Sistema riconosce articoli correlati a comunicati (da approfondire meccanismo)
 - Possibili criteri: citazioni, link, timing, analisi contenuto
 
-### 11.4 Accesso Ospite
+### 12.4 Accesso Ospite
 
 **Visualizzazione:**
 
@@ -787,9 +813,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 12. Sistema To-Do
+## 13. Sistema To-Do
 
-### 12.1 Funzionalità Base
+### 13.1 Funzionalità Base
 
 **Creazione:**
 
@@ -804,14 +830,14 @@ Prima dell'invio definitivo:
    - Non funziona come calendario tradizionale
    - Visualizzazione a calendario per vedere distribuzione temporale to-do
 
-### 12.2 Collegamenti
+### 13.2 Collegamenti
 
 **Associazione:**
 
 - To-do collegabili a progetti specifici
 - Non collegabili a liste o comunicati (versione iniziale)
 
-### 12.3 Stati
+### 13.3 Stati
 
 **Stati disponibili:**
 
@@ -820,7 +846,7 @@ Prima dell'invio definitivo:
 
 **Nota:** Non previsto stato "in corso"
 
-### 12.4 Assegnazione
+### 13.4 Assegnazione
 
 **Possibilità:**
 
@@ -832,11 +858,11 @@ Prima dell'invio definitivo:
 - Ogni utente vede solo i propri to-do
 - Admin non vede to-do di tutti (da rivalutare se admin può assegnare)
 
-### 12.5 Notifiche
+### 13.5 Notifiche
 
 - Nessuna notifica/reminder per scadenze to-do (versione iniziale)
 
-### 12.6 Utilizzo per Onboarding
+### 13.6 Utilizzo per Onboarding
 
 **Idea per nuovo utente:**
 
@@ -847,9 +873,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 13. Integrazione Intelligenza Artificiale
+## 14. Integrazione Intelligenza Artificiale
 
-### 13.1 Creazione Liste con AI
+### 14.1 Creazione Liste con AI
 
 **Modalità conversazionale:**
 
@@ -867,7 +893,7 @@ Prima dell'invio definitivo:
 - Sistema AI coesiste con filtri manuali
 - Utente sceglie modalità preferita
 
-### 13.2 Assistenza Creazione Comunicato
+### 14.2 Assistenza Creazione Comunicato
 
 **Funzionalità:**
 
@@ -877,7 +903,7 @@ Prima dell'invio definitivo:
 
 **Implementazione:** da definire
 
-### 13.3 Suggerimenti Proattivi
+### 14.3 Suggerimenti Proattivi
 
 **AI suggerisce giornalisti:**
 
@@ -892,7 +918,7 @@ Prima dell'invio definitivo:
 - "Vedo che selezioni spesso giornalisti di questo tipo..."
 - Implementazione da definire
 
-### 13.4 Timing Ottimale (da valutare)
+### 14.4 Timing Ottimale (da valutare)
 
 **Suggerimento orario invio:**
 
@@ -902,9 +928,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 14. Sistema Notifiche
+## 15. Sistema Notifiche
 
-### 14.1 Tipologie Notifiche
+### 15.1 Tipologie Notifiche
 
 **Notifiche in-app:**
 
@@ -926,7 +952,7 @@ Prima dell'invio definitivo:
 - Spedizioni completate: priorità alta
 - Aggiornamenti database: informativo
 
-### 14.2 Canali
+### 15.2 Canali
 
 **In-app:**
 
@@ -939,9 +965,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 15. Privacy, Sicurezza e Compliance
+## 16. Privacy, Sicurezza e Compliance
 
-### 15.1 GDPR
+### 16.1 GDPR
 
 **Diritti giornalisti:**
 
@@ -955,7 +981,7 @@ Prima dell'invio definitivo:
 - Può essere specifico per organizzazione
 - Sistema deve gestire liste di esclusione
 
-### 15.2 Log Attività
+### 16.2 Log Attività
 
 **Tracking per compliance:**
 
@@ -969,7 +995,7 @@ Prima dell'invio definitivo:
 - Conservazione dati per fini di compliance
 - Audit trail completo
 
-### 15.3 Sicurezza Account
+### 16.3 Sicurezza Account
 
 **Autenticazione:**
 
@@ -983,9 +1009,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 16. Documentazione e Supporto
+## 17. Documentazione e Supporto
 
-### 16.1 Sezione Aiuto
+### 17.1 Sezione Aiuto
 
 **Contenuto:**
 
@@ -994,7 +1020,7 @@ Prima dell'invio definitivo:
 - Guide passo-passo
 - Risoluzione problemi tipici
 
-### 16.2 Onboarding
+### 17.2 Onboarding
 
 **Primo accesso:**
 
@@ -1010,9 +1036,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 17. Aspetti Tecnici
+## 18. Aspetti Tecnici
 
-### 17.1 Stack Tecnologico
+### 18.1 Stack Tecnologico
 
 **Backend:**
 
@@ -1027,14 +1053,14 @@ Prima dell'invio definitivo:
 
 - Da definire con team di sviluppo
 
-### 17.2 Architettura
+### 18.2 Architettura
 
 **Tipo applicazione:**
 
 - Web application
 - Responsive design
 
-### 17.3 Responsive e Multi-Device
+### 18.3 Responsive e Multi-Device
 
 **Desktop:**
 
@@ -1057,7 +1083,7 @@ Prima dell'invio definitivo:
 - Creazione comunicati
 - Gestione progetti complessi
 
-### 17.4 Performance
+### 18.4 Performance
 
 **Aspettative:**
 
@@ -1066,15 +1092,15 @@ Prima dell'invio definitivo:
 - Filtri: tempi ragionevoli anche con query complesse
 - Caricamento pagine: snappy
 
-### 17.5 Browser Support
+### 18.5 Browser Support
 
 - Da definire (browser moderni standard)
 
 ---
 
-## 18. Integrazione con Piattaforma Rassegna Stampa
+## 19. Integrazione con Piattaforma Rassegna Stampa
 
-### 18.1 Natura Integrazione
+### 19.1 Natura Integrazione
 
 **Sistemi separati:**
 
@@ -1086,7 +1112,7 @@ Prima dell'invio definitivo:
 - Integrazione API tra i due sistemi
 - Dati sincronizzati
 
-### 18.2 Sincronizzazione
+### 19.2 Sincronizzazione
 
 **Modalità:**
 
@@ -1100,7 +1126,7 @@ Prima dell'invio definitivo:
 - Dati aggiornati automaticamente
 - Trasparenza totale per l'utente
 
-### 18.3 Dati Condivisi
+### 19.3 Dati Condivisi
 
 **Da rassegna stampa a MediaContacts:**
 
@@ -1111,13 +1137,13 @@ Prima dell'invio definitivo:
 
 ---
 
-## 19. Elementi Brand
+## 20. Elementi Brand
 
-### 19.1 Nome Progetto
+### 20.1 Nome Progetto
 
 **Nome in codice:** MediaContacts
 
-### 19.2 Identità Visiva
+### 20.2 Identità Visiva
 
 **Elementi definiti:**
 
@@ -1133,9 +1159,9 @@ Prima dell'invio definitivo:
 
 **Nota:** Massima libertà al designer su scelte non vincolate
 
-## 20. Considerazioni per il Design
+## 21. Considerazioni per il Design
 
-### 20.1 Approccio alle Specifiche
+### 21.1 Approccio alle Specifiche
 
 **Filosofia:**
 
@@ -1149,7 +1175,7 @@ Prima dell'invio definitivo:
   - Dashboard e visualizzazioni dati
   - Microinterazioni
 
-### 20.2 Funzionalità vs. Implementazione
+### 21.2 Funzionalità vs. Implementazione
 
 **Esempi di decisioni delegate al designer:**
 
@@ -1160,7 +1186,7 @@ Prima dell'invio definitivo:
 - Posizionamento e priorità delle azioni frequenti
 - Sistema di navigazione tra sezioni
 
-### 20.3 Complessità da Gestire
+### 21.3 Complessità da Gestire
 
 **Sfide principali per il design:**
 
@@ -1171,7 +1197,7 @@ Prima dell'invio definitivo:
 5. **Workflow lunghi**: dalla ricerca giornalisti all'invio comunicato
 6. **Statistiche dettagliate**: presentazione dati tracking in modo chiaro
 
-### 20.4 Focus su Usabilità
+### 21.4 Focus su Usabilità
 
 **Considerazioni importanti:**
 
@@ -1183,9 +1209,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 21. Flussi Utente Principali
+## 22. Flussi Utente Principali
 
-### 21.1 Flusso Creazione e Invio Comunicato (Completo)
+### 22.1 Flusso Creazione e Invio Comunicato (Completo)
 
 1. Ricerca/filtro giornalisti nel database
 2. Selezione giornalisti
@@ -1198,7 +1224,7 @@ Prima dell'invio definitivo:
 9. Monitoraggio invio in corso
 10. Visualizzazione statistiche
 
-### 21.2 Flusso Riutilizzo Liste Esistenti
+### 22.2 Flusso Riutilizzo Liste Esistenti
 
 1. Accesso a liste salvate
 2. Selezione lista
@@ -1206,7 +1232,7 @@ Prima dell'invio definitivo:
 4. Creazione comunicato
 5. Prosegue come flusso principale da punto 5
 
-### 21.3 Flusso con AI
+### 22.3 Flusso con AI
 
 1. Accesso modalità chat AI
 2. Descrizione criteri in linguaggio naturale
@@ -1215,7 +1241,7 @@ Prima dell'invio definitivo:
 5. Salvataggio lista
 6. Prosegue come flusso principale da punto 4
 
-### 21.4 Flusso Import Lista
+### 22.4 Flusso Import Lista
 
 1. Caricamento file CSV
 2. Mapping campi
@@ -1225,7 +1251,7 @@ Prima dell'invio definitivo:
 6. Salvataggio
 7. Prosegue come flusso principale da punto 4
 
-### 21.5 Flusso Cliente Ospite
+### 22.5 Flusso Cliente Ospite
 
 1. Accesso piattaforma (credenziali limitate)
 2. Visualizzazione progetti assegnati
@@ -1236,9 +1262,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 22. Scenari d'Uso Tipici
+## 23. Scenari d'Uso Tipici
 
-### 22.1 Lancio Nuovo Prodotto
+### 23.1 Lancio Nuovo Prodotto
 
 **Attività:**
 
@@ -1251,7 +1277,7 @@ Prima dell'invio definitivo:
 - Rassegna stampa articoli usciti
 - Report al cliente tramite progetto
 
-### 22.2 Comunicato Ricorrente (es. Risultati Trimestrali)
+### 23.2 Comunicato Ricorrente (es. Risultati Trimestrali)
 
 **Attività:**
 
@@ -1263,7 +1289,7 @@ Prima dell'invio definitivo:
 - Invio a lista consolidata
 - Confronto performance con trimestri precedenti (funzione futura)
 
-### 22.3 Gestione Multi-Cliente (Agenzia)
+### 23.3 Gestione Multi-Cliente (Agenzia)
 
 **Attività:**
 
@@ -1274,7 +1300,7 @@ Prima dell'invio definitivo:
 - Rassegna stampa dedicata per cliente
 - To-do per gestire timeline multiple clienti
 
-### 22.4 Aggiornamento Lista Obsoleta
+### 23.4 Aggiornamento Lista Obsoleta
 
 **Attività:**
 
@@ -1288,9 +1314,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 23. Metriche di Successo (Suggerite)
+## 24. Metriche di Successo (Suggerite)
 
-### 23.1 Metriche Prodotto
+### 24.1 Metriche Prodotto
 
 **Adozione:**
 
@@ -1317,7 +1343,7 @@ Prima dell'invio definitivo:
 - Tasso risposta giornalisti
 - Numero articoli risultanti per comunicato
 
-### 23.2 Metriche Business
+### 24.2 Metriche Business
 
 **Valore per utente:**
 
@@ -1333,9 +1359,9 @@ Prima dell'invio definitivo:
 
 ---
 
-## 24. Roadmap Funzionalità Future (Possibili)
+## 25. Roadmap Funzionalità Future (Possibili)
 
-### 24.1 Breve Termine
+### 25.1 Breve Termine
 
 **Già menzionate come "da valutare":**
 
@@ -1348,7 +1374,7 @@ Prima dell'invio definitivo:
 - Flusso approvazione comunicati
 - Interruzione invio in corso
 
-### 24.2 Medio Termine
+### 25.2 Medio Termine
 
 **Intelligenza Artificiale avanzata:**
 
@@ -1371,7 +1397,7 @@ Prima dell'invio definitivo:
 - Previsioni performance
 - Benchmark settoriali
 
-### 24.3 Lungo Termine
+### 25.3 Lungo Termine
 
 **Espansione internazionale:**
 
@@ -1392,33 +1418,3 @@ Prima dell'invio definitivo:
 - Follow-up automatici
 - Segmentazione dinamica liste
 - A/B testing comunicati
-
----
-
-## 25. Glossario Termini
-
-**Comunicato**: Il contenuto del messaggio stampa (testo, immagini, allegati)
-
-**Spedizione/Invio**: L'atto di inviare un comunicato a una lista di destinatari
-
-**Lista**: Insieme di contatti giornalisti selezionati per una spedizione
-
-**Media Kit**: Insieme di allegati (immagini, PDF, documenti) associati a un comunicato
-
-**Progetto**: Contenitore che raggruppa comunicati e rassegna stampa per un cliente/campagna
-
-**Rassegna Stampa**: Collezione di articoli pubblicati in risposta a comunicati
-
-**Word Cloud**: Visualizzazione grafica delle parole più frequenti negli articoli di un giornalista
-
-**Bounce**: Email non consegnata (indirizzo errato, casella piena, ecc.)
-
-**Friendliness**: Indice di reattività di un giornalista ai comunicati ricevuti
-
-**Ospite**: Tipo di utente con accesso limitato (solo visualizzazione progetti)
-
-**To-Do**: Task/attività da completare
-
-**Filtri**: Criteri di selezione per ricerca giornalisti nel database
-
-**MVP**: Minimum Viable Product - versione iniziale con funzionalità core

@@ -1,0 +1,4 @@
+Quando l'utente richiede modifiche a SPEC.md:
+1. Completa tutte le modifiche necessarie
+2. Lancia lo script md2html.sh per rigenerare SPEC.html
+3. Crea un commit git con le modifiche
