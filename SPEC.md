@@ -541,7 +541,7 @@ Gli utenti possono filtrare i giornalisti secondo:
 - **Frequenza di pubblicazione**: della testata (quotidiano, quindicinale, trisettimanale, bisettimanale, mensile, oltre al mese, settimanale)
 - **Diffusione territoriale**: ambito geografico della testata
 - **Ruolo del giornalista**: posizione nella redazione
-- **Tipo di media**: agenzia stampa, carta stampata, online, radio, TV
+- **Tipo di media**: agenzia stampa, carta stampata (periodici al pubblico (riviste), periodici di categoria, quotidiani, supplementi), online (blog, online news), radio (news / GR, trasmissioni radio), TV (canali tematici, news / TG, programmi TV)
 - **Ricerca testuale**: stringhe di testo libero
 
 **Caratteristiche filtri:**
