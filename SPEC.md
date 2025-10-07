@@ -228,55 +228,308 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ### 5.4 Argomenti e Categorie
 
-**Macro-categorie:**
+**Agricoltura**
 
-- Agricoltura
-- Alimentari
-- Ambiente
-- Amministrazione
-- Architettura
-- Arredamento
-- Arte
+- Agricoltura biologica
+- Agroalimentare
+- Foreste
+
+**Alimentari**
+
+- Alimentazione
+- Alimenti di produzione biologica
+- Bevande
+
+**Ambiente**
+
+- Cambiamento climatico
+- Ecologia
+- Inquinamento
+- Territorio
+
+**Amministrazione e servizi pubblici**
+
+- Amministrazione pubblica
+- Biblioteche
+- Lavori pubblici
+
+**Architettura**
+
+- Architettura del paesaggio
+- Bioarchitettura
+- Ingegneria civile
+
+**Arredamento**
+
+- Arredo urbano
+- Design
+- Forniture
+- Modernariato
+
+**Arte e cultura**
+
+- Arte contemporanea
+- Cultura
+- Disegno
+- Filosofia
+- Poesia
+- Storia
+
+**Attualità**
+
+- Annunci economici
 - Attualità
-- Automazione
-- Chimica
-- Commercio
-- Cosmesi
+- Informazioni regionali
+- Cronaca nera
+- Cronaca locale
+- News
+- Inchieste
+
+**Automazione e strumentazione**
+
+- Misurazioni e strumenti
+- Robotica
+
+**Chimica**
+
+- Biochimica
+- Farmaceutica
+
+**Commercio**
+
+- Beni di consumo
+- Commercio internazionale
+- Grande distribuzione
+
+**Cosmesi**
+
+- Bellezza
+- Cura dei capelli
+- Medicina estetica
+
+**Economia e finanza**
+
+- Banca
+- Borsa
+- Buoni del tesoro
 - Economia
-- Edilizia
-- Energia
-- Fotografia
-- Gestione e logistica materiale
-- Hi-fi, elettronica
-- Hobby, tempo libero
-- Impiantistica, macchinario
-- Impresa, lavoro
-- Informatica, web
-- Legge, diritto, fisco
-- Management, organizzazione, politica
-- Musica
-- Motori
-- Moda
-- Scienza
+- Euromercati
+- Finanza
+- Materie prime
+- Mercato azionario
+
+**Edilizia**
+
+- Materiali
+- Serramenti
+- Tecnologia delle costruzioni
+
+**Energia**
+
+- Energie rinnovabili
+- Gas
+- Ingegneria petrolifera
+
+**Fotografia**
+
+- Ottica
+- Fotografia digitale
+
+**Gestione e logistica materiali**
+
+- Refrigerazione
+- Immagazzinaggio
+- Imballaggio
+
+**Elettronica**
+
+- Video
+- Elettronica
+- Hi-fi
+
+**Hobby e tempo libero**
+
+- Animali
+- Armi
+- Giochi
+- Giardinaggio
+- Fumetti
+- Fantascienza
+- Modellismo
+
+**Impiantistica**
+
+- Macchinari
+- Macchine utensili
+- Meccanica
+- Meccanizzazione agricola
+
+**Imprese e industria**
+
+- Esportazione
+- Industria
+- Imprese
+- Metallurgia
+- Produzione
+
+**Informatica**
+
+- App
+- Hardware informatico
+- Videogames
+- Multimedialità
+- Sicurezza dei sistemi
+- Software
+- Web design
+
+**Lavoro**
+
+- Previdenza
+- Telelavoro
+- Mercato del lavoro
+
+**Legge**
+
+- Fisco
+- Tributi
+- Diritto
+
+**Organizzazione aziendale**
+
+- Management
+- Risorse umane
+- Organizzazione aziendale
+
+**Medicina, salute e benessere**
+
+- Cardiologia
+- Chirurgia
+- Dermatologia
+- Dietetica
+- Erboristeria
+- Farmacia
+- Fitness
+- Medicina generale
+- Neuroscienze
+- Omeopatia
+- Pedagogia
+- Sanità
+- Salute
+- Terme
+
+**Moda**
+
+- Accessori
+- Alta moda
+- Lifestyle
+- Moda luxury
+- Moda business
+- Moda bimbi
+- Tessile moda
+
+**Motori**
+
+- Moto
+- Veicoli elettrici
+- Camper
+- Caravan
+
+**Musica**
+
+- Dischi
+- Musica leggera
+- Musica jazz
+- Musica varia
+
+**Politica**
+
+- Interni
+- Geopolitica
+- Politica interna
+- Politica economica
+- Vaticano
+
+**Pubblicità, marketing e comunicazione**
+
+- Advertising
+- Comunicazione
+- Media
+
+**Radio/TV e video**
+
+- Video
+- Programmi radio
+
+**Ristorazione**
+
+- Alberghi
+- Hotel
+- Bar
+- Catering
 - Ristorazione
-- Radio
-- Pubblicità
+
+**Scienze**
+
+- Astronomia
+- Aerospazio
+- Fisica
+- Geologia
+- Scienza
+- Matematica
+- Innovazione
+- Statistica
+
+**Sicurezza**
+
+- Prevenzione del crimine
+- Sicurezza stradale
+- Sicurezza sul lavoro
+
+**Società**
+
+- Mafia
+- Giovani
+- Famiglia
+- Costume
+- Astrologia
 - Società
+- Scuola
+- Satira
+- Terzo mondo
+
+**Spettacoli**
+
+- Cinema
 - Spettacoli
-- Sport
-- Telecomunicazioni
-- Trasporto
-- Turismo
+- Danza
 
-**Sotto-categorie (esempio Turismo):**
+**Sport**
 
-- Agriturismo
-- Camping
+- Arti marziali
+- Baseball
+- Equitazione
+- Olimpiadi
+- Pallacanestro
+- Trekking
+- Tennis
+
+**Telecomunicazioni**
+
+- Telefonia
+- Telecomunicazioni varie
+
+**Trasporto**
+
+- Trasporto marittimo
+- Trasporto pubblico
+- Trasporto ferroviario
+- Viabilità
+
+**Turismo**
+
 - Fiere
-- Turismo
-- Viaggi e turismo
-
-_Nota: Ogni macro-categoria ha le proprie sotto-categorie specifiche_
+- Camping
+- Agriturismo
 
 ### 5.5 Criteri di Filtro Giornalisti
 
@@ -284,9 +537,9 @@ Gli utenti possono filtrare i giornalisti secondo:
 
 - **Argomento**: categoria/sottocategoria di interesse
 - **Testata giornalistica**: nome della testata
-- **Redazione**: sede/redazione di appartenenza
-- **Frequenza di pubblicazione**: della testata
-- **Diffusione territoriale**: ambito geografico della testata/redazione
+- **Sede del giornalista**: ubicazione del giornalista
+- **Frequenza di pubblicazione**: della testata (quotidiano, quindicinale, trisettimanale, bisettimanale, mensile, oltre al mese, settimanale)
+- **Diffusione territoriale**: ambito geografico della testata
 - **Ruolo del giornalista**: posizione nella redazione
 - **Tipo di media**: agenzia stampa, carta stampata, online, radio, TV
 - **Ricerca testuale**: stringhe di testo libero
@@ -1158,16 +1411,7 @@ Prima dell'invio definitivo:
 
 ## 20. Elementi Brand
 
-### 20.1 Nome Progetto
-
-**Nome in codice:** MediaContacts
-
-### 20.2 Identità Visiva
-
-**Elementi definiti:**
-
-- Logo (già esistente)
-- Colore accento (già definito)
+### 20.1 Identità Visiva
 
 **Elementi liberi:**
 
