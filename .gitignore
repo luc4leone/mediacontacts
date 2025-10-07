@@ -1,6 +1,5 @@
 # Generated HTML files
-SPEC.html
-*.html
+# (SPEC.html is tracked for sharing purposes)
 
 # Node modules (if you add npm later)
 node_modules/

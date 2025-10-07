@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Progetto MediaContacts</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Progetto MediaContacts</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#spec-di-alto-livello---mediacontacts"
+id="toc-spec-di-alto-livello---mediacontacts">SPEC DI ALTO LIVELLO -
+MediaContacts</a>
+<ul>
+<li><a href="#glossario-termini" id="toc-glossario-termini">1. Glossario
+Termini</a></li>
+<li><a href="#overview-del-progetto" id="toc-overview-del-progetto">2.
+Overview del Progetto</a>
+<ul>
+<li><a href="#descrizione-generale" id="toc-descrizione-generale">2.1
+Descrizione Generale</a></li>
+<li><a href="#obiettivo-principale" id="toc-obiettivo-principale">2.2
+Obiettivo Principale</a></li>
+<li><a href="#utenti-target" id="toc-utenti-target">2.3 Utenti
+Target</a></li>
+<li><a href="#mercato-di-riferimento"
+id="toc-mercato-di-riferimento">2.4 Mercato di Riferimento</a></li>
+</ul></li>
+<li><a href="#tipologie-di-utenti-e-permessi"
+id="toc-tipologie-di-utenti-e-permessi">3. Tipologie di Utenti e
+Permessi</a>
+<ul>
+<li><a href="#amministratore" id="toc-amministratore">3.1
+Amministratore</a></li>
+<li><a href="#utente-standard" id="toc-utente-standard">3.2 Utente
+Standard</a></li>
+<li><a href="#ospite-cliente" id="toc-ospite-cliente">3.3 Ospite
+(Cliente)</a></li>
+<li><a href="#gestione-account" id="toc-gestione-account">3.4 Gestione
+Account</a></li>
+</ul></li>
+<li><a href="#funzionalità-principali"
+id="toc-funzionalità-principali">4. Funzionalità Principali</a>
+<ul>
+<li><a href="#priorità-assoluta" id="toc-priorità-assoluta">4.1 Priorità
+Assoluta</a></li>
+<li><a href="#funzionalità-essenziali-aggiuntive"
+id="toc-funzionalità-essenziali-aggiuntive">4.2 Funzionalità Essenziali
+Aggiuntive</a></li>
+</ul></li>
+<li><a href="#gestione-database-giornalisti"
+id="toc-gestione-database-giornalisti">5. Gestione Database
+Giornalisti</a>
+<ul>
+<li><a href="#struttura-dati-giornalista"
+id="toc-struttura-dati-giornalista">5.1 Struttura Dati
+Giornalista</a></li>
+<li><a href="#relazioni-tra-entità" id="toc-relazioni-tra-entità">5.2
+Relazioni tra Entità</a></li>
+<li><a href="#ruoli-giornalisti" id="toc-ruoli-giornalisti">5.3 Ruoli
+Giornalisti</a></li>
+<li><a href="#argomenti-e-categorie" id="toc-argomenti-e-categorie">5.4
+Argomenti e Categorie</a></li>
+<li><a href="#criteri-di-filtro-giornalisti"
+id="toc-criteri-di-filtro-giornalisti">5.5 Criteri di Filtro
+Giornalisti</a></li>
+<li><a href="#ricerca-giornalisti" id="toc-ricerca-giornalisti">5.6
+Ricerca Giornalisti</a></li>
+<li><a href="#word-cloud" id="toc-word-cloud">5.7 Word Cloud</a></li>
+<li><a href="#aggiornamento-database"
+id="toc-aggiornamento-database">5.8 Aggiornamento Database</a></li>
+<li><a href="#gestione-duplicati" id="toc-gestione-duplicati">5.9
+Gestione Duplicati</a></li>
+</ul></li>
+<li><a href="#gestione-testate-giornalistiche"
+id="toc-gestione-testate-giornalistiche">6. Gestione Testate
+Giornalistiche</a>
+<ul>
+<li><a href="#informazioni-testata" id="toc-informazioni-testata">6.1
+Informazioni Testata</a></li>
+<li><a href="#tipo-di-media" id="toc-tipo-di-media">6.2 Tipo di
+Media</a></li>
+<li><a href="#contatti-redazione" id="toc-contatti-redazione">6.3
+Contatti Redazione</a></li>
+</ul></li>
+<li><a href="#gestione-liste" id="toc-gestione-liste">7. Gestione
+Liste</a>
+<ul>
+<li><a href="#creazione-liste" id="toc-creazione-liste">7.1 Creazione
+Liste</a></li>
+<li><a href="#modifica-liste" id="toc-modifica-liste">7.2 Modifica
+Liste</a></li>
+<li><a href="#salvataggio-e-organizzazione"
+id="toc-salvataggio-e-organizzazione">7.3 Salvataggio e
+Organizzazione</a></li>
+<li><a href="#condivisione-e-visibilità"
+id="toc-condivisione-e-visibilità">7.4 Condivisione e
+Visibilità</a></li>
+<li><a href="#cancellazione" id="toc-cancellazione">7.5
+Cancellazione</a></li>
+<li><a href="#limiti" id="toc-limiti">7.6 Limiti</a></li>
+</ul></li>
+<li><a href="#importexport-liste" id="toc-importexport-liste">8.
+Import/Export Liste</a>
+<ul>
+<li><a href="#import" id="toc-import">8.1 Import</a></li>
+<li><a href="#export" id="toc-export">8.2 Export</a></li>
+</ul></li>
+<li><a href="#gestione-comunicati" id="toc-gestione-comunicati">9.
+Gestione Comunicati</a>
+<ul>
+<li><a href="#creazione-comunicato" id="toc-creazione-comunicato">9.1
+Creazione Comunicato</a></li>
+<li><a href="#media-kit-e-allegati" id="toc-media-kit-e-allegati">9.2
+Media Kit e Allegati</a></li>
+<li><a href="#template" id="toc-template">9.3 Template</a></li>
+<li><a href="#personalizzazione-e-branding"
+id="toc-personalizzazione-e-branding">9.4 Personalizzazione e
+Branding</a></li>
+<li><a href="#gestione-bozze" id="toc-gestione-bozze">9.5 Gestione
+Bozze</a></li>
+<li><a href="#duplicazione" id="toc-duplicazione">9.6
+Duplicazione</a></li>
+<li><a href="#versioni-multiple" id="toc-versioni-multiple">9.7 Versioni
+Multiple</a></li>
+<li><a href="#anteprima" id="toc-anteprima">9.8 Anteprima</a></li>
+</ul></li>
+<li><a href="#invio-comunicati-spedizioni"
+id="toc-invio-comunicati-spedizioni">10. Invio Comunicati
+(Spedizioni)</a>
+<ul>
+<li><a href="#terminologia" id="toc-terminologia">10.1
+Terminologia</a></li>
+<li><a href="#configurazione-invio" id="toc-configurazione-invio">10.2
+Configurazione Invio</a></li>
+<li><a href="#schermata-di-riepilogoconferma"
+id="toc-schermata-di-riepilogoconferma">10.3 Schermata di
+Riepilogo/Conferma</a></li>
+<li><a href="#test-invio" id="toc-test-invio">10.4 Test Invio</a></li>
+<li><a href="#modalità-di-invio" id="toc-modalità-di-invio">10.5
+Modalità di Invio</a></li>
+<li><a href="#programmazione-invio" id="toc-programmazione-invio">10.6
+Programmazione Invio</a></li>
+<li><a href="#processo-di-invio" id="toc-processo-di-invio">10.7
+Processo di Invio</a></li>
+<li><a href="#gestione-errori" id="toc-gestione-errori">10.8 Gestione
+Errori</a></li>
+</ul></li>
+<li><a href="#statistiche-e-tracking"
+id="toc-statistiche-e-tracking">11. Statistiche e Tracking</a>
+<ul>
+<li><a href="#metriche-disponibili" id="toc-metriche-disponibili">11.1
+Metriche Disponibili</a></li>
+<li><a href="#livello-di-dettaglio" id="toc-livello-di-dettaglio">11.2
+Livello di Dettaglio</a></li>
+<li><a href="#export-statistiche" id="toc-export-statistiche">11.3
+Export Statistiche</a></li>
+<li><a href="#storico-contatti-giornalista"
+id="toc-storico-contatti-giornalista">11.4 Storico Contatti
+Giornalista</a></li>
+</ul></li>
+<li><a href="#progetti-e-cliente-ospite"
+id="toc-progetti-e-cliente-ospite">12. Progetti e Cliente Ospite</a>
+<ul>
+<li><a href="#struttura-progetto" id="toc-struttura-progetto">12.1
+Struttura Progetto</a></li>
+<li><a href="#durata-progetti" id="toc-durata-progetti">12.2 Durata
+Progetti</a></li>
+<li><a href="#rassegna-stampa" id="toc-rassegna-stampa">12.3 Rassegna
+Stampa</a></li>
+<li><a href="#accesso-ospite" id="toc-accesso-ospite">12.4 Accesso
+Ospite</a></li>
+</ul></li>
+<li><a href="#sistema-to-do" id="toc-sistema-to-do">13. Sistema
+To-Do</a>
+<ul>
+<li><a href="#funzionalità-base" id="toc-funzionalità-base">13.1
+Funzionalità Base</a></li>
+<li><a href="#collegamenti" id="toc-collegamenti">13.2
+Collegamenti</a></li>
+<li><a href="#stati" id="toc-stati">13.3 Stati</a></li>
+<li><a href="#assegnazione" id="toc-assegnazione">13.4
+Assegnazione</a></li>
+<li><a href="#notifiche" id="toc-notifiche">13.5 Notifiche</a></li>
+<li><a href="#utilizzo-per-onboarding"
+id="toc-utilizzo-per-onboarding">13.6 Utilizzo per Onboarding</a></li>
+</ul></li>
+<li><a href="#integrazione-intelligenza-artificiale"
+id="toc-integrazione-intelligenza-artificiale">14. Integrazione
+Intelligenza Artificiale</a>
+<ul>
+<li><a href="#creazione-liste-con-ai"
+id="toc-creazione-liste-con-ai">14.1 Creazione Liste con AI</a></li>
+<li><a href="#assistenza-creazione-comunicato"
+id="toc-assistenza-creazione-comunicato">14.2 Assistenza Creazione
+Comunicato</a></li>
+<li><a href="#suggerimenti-proattivi"
+id="toc-suggerimenti-proattivi">14.3 Suggerimenti Proattivi</a></li>
+<li><a href="#timing-ottimale-da-valutare"
+id="toc-timing-ottimale-da-valutare">14.4 Timing Ottimale (da
+valutare)</a></li>
+</ul></li>
+<li><a href="#sistema-notifiche" id="toc-sistema-notifiche">15. Sistema
+Notifiche</a>
+<ul>
+<li><a href="#tipologie-notifiche" id="toc-tipologie-notifiche">15.1
+Tipologie Notifiche</a></li>
+<li><a href="#canali" id="toc-canali">15.2 Canali</a></li>
+</ul></li>
+<li><a href="#privacy-sicurezza-e-compliance"
+id="toc-privacy-sicurezza-e-compliance">16. Privacy, Sicurezza e
+Compliance</a>
+<ul>
+<li><a href="#gdpr" id="toc-gdpr">16.1 GDPR</a></li>
+<li><a href="#log-attività" id="toc-log-attività">16.2 Log
+Attività</a></li>
+<li><a href="#sicurezza-account" id="toc-sicurezza-account">16.3
+Sicurezza Account</a></li>
+</ul></li>
+<li><a href="#documentazione-e-supporto"
+id="toc-documentazione-e-supporto">17. Documentazione e Supporto</a>
+<ul>
+<li><a href="#sezione-aiuto" id="toc-sezione-aiuto">17.1 Sezione
+Aiuto</a></li>
+<li><a href="#onboarding" id="toc-onboarding">17.2 Onboarding</a></li>
+</ul></li>
+<li><a href="#aspetti-tecnici" id="toc-aspetti-tecnici">18. Aspetti
+Tecnici</a>
+<ul>
+<li><a href="#stack-tecnologico" id="toc-stack-tecnologico">18.1 Stack
+Tecnologico</a></li>
+<li><a href="#architettura" id="toc-architettura">18.2
+Architettura</a></li>
+<li><a href="#responsive-e-multi-device"
+id="toc-responsive-e-multi-device">18.3 Responsive e
+Multi-Device</a></li>
+<li><a href="#performance" id="toc-performance">18.4
+Performance</a></li>
+<li><a href="#browser-support" id="toc-browser-support">18.5 Browser
+Support</a></li>
+</ul></li>
+<li><a href="#integrazione-con-piattaforma-rassegna-stampa"
+id="toc-integrazione-con-piattaforma-rassegna-stampa">19. Integrazione
+con Piattaforma Rassegna Stampa</a>
+<ul>
+<li><a href="#natura-integrazione" id="toc-natura-integrazione">19.1
+Natura Integrazione</a></li>
+<li><a href="#sincronizzazione" id="toc-sincronizzazione">19.2
+Sincronizzazione</a></li>
+<li><a href="#dati-condivisi" id="toc-dati-condivisi">19.3 Dati
+Condivisi</a></li>
+</ul></li>
+<li><a href="#elementi-brand" id="toc-elementi-brand">20. Elementi
+Brand</a>
+<ul>
+<li><a href="#identità-visiva" id="toc-identità-visiva">20.1 Identità
+Visiva</a></li>
+</ul></li>
+<li><a href="#considerazioni-per-il-design"
+id="toc-considerazioni-per-il-design">21. Considerazioni per il
+Design</a>
+<ul>
+<li><a href="#approccio-alle-specifiche"
+id="toc-approccio-alle-specifiche">21.1 Approccio alle
+Specifiche</a></li>
+<li><a href="#funzionalità-vs.-implementazione"
+id="toc-funzionalità-vs.-implementazione">21.2 Funzionalità
+vs. Implementazione</a></li>
+<li><a href="#complessità-da-gestire"
+id="toc-complessità-da-gestire">21.3 Complessità da Gestire</a></li>
+<li><a href="#focus-su-usabilità" id="toc-focus-su-usabilità">21.4 Focus
+su Usabilità</a></li>
+</ul></li>
+<li><a href="#flussi-utente-principali"
+id="toc-flussi-utente-principali">22. Flussi Utente Principali</a>
+<ul>
+<li><a href="#flusso-creazione-e-invio-comunicato-completo"
+id="toc-flusso-creazione-e-invio-comunicato-completo">22.1 Flusso
+Creazione e Invio Comunicato (Completo)</a></li>
+<li><a href="#flusso-riutilizzo-liste-esistenti"
+id="toc-flusso-riutilizzo-liste-esistenti">22.2 Flusso Riutilizzo Liste
+Esistenti</a></li>
+<li><a href="#flusso-con-ai" id="toc-flusso-con-ai">22.3 Flusso con
+AI</a></li>
+<li><a href="#flusso-import-lista" id="toc-flusso-import-lista">22.4
+Flusso Import Lista</a></li>
+<li><a href="#flusso-cliente-ospite" id="toc-flusso-cliente-ospite">22.5
+Flusso Cliente Ospite</a></li>
+</ul></li>
+<li><a href="#scenari-duso-tipici" id="toc-scenari-duso-tipici">23.
+Scenari d’Uso Tipici</a>
+<ul>
+<li><a href="#lancio-nuovo-prodotto" id="toc-lancio-nuovo-prodotto">23.1
+Lancio Nuovo Prodotto</a></li>
+<li><a href="#comunicato-ricorrente-es.-risultati-trimestrali"
+id="toc-comunicato-ricorrente-es.-risultati-trimestrali">23.2 Comunicato
+Ricorrente (es. Risultati Trimestrali)</a></li>
+<li><a href="#gestione-multi-cliente-agenzia"
+id="toc-gestione-multi-cliente-agenzia">23.3 Gestione Multi-Cliente
+(Agenzia)</a></li>
+<li><a href="#aggiornamento-lista-obsoleta"
+id="toc-aggiornamento-lista-obsoleta">23.4 Aggiornamento Lista
+Obsoleta</a></li>
+</ul></li>
+<li><a href="#metriche-di-successo-suggerite"
+id="toc-metriche-di-successo-suggerite">24. Metriche di Successo
+(Suggerite)</a>
+<ul>
+<li><a href="#metriche-prodotto" id="toc-metriche-prodotto">24.1
+Metriche Prodotto</a></li>
+<li><a href="#metriche-business" id="toc-metriche-business">24.2
+Metriche Business</a></li>
+</ul></li>
+<li><a href="#roadmap-funzionalità-future-possibili"
+id="toc-roadmap-funzionalità-future-possibili">25. Roadmap Funzionalità
+Future (Possibili)</a>
+<ul>
+<li><a href="#breve-termine" id="toc-breve-termine">25.1 Breve
+Termine</a></li>
+<li><a href="#medio-termine" id="toc-medio-termine">25.2 Medio
+Termine</a></li>
+<li><a href="#lungo-termine" id="toc-lungo-termine">25.3 Lungo
+Termine</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="spec-di-alto-livello---mediacontacts">SPEC DI ALTO LIVELLO -
+MediaContacts</h1>
+<h2 id="glossario-termini">1. Glossario Termini</h2>
+<p><strong>Comunicato Stampa</strong>: Testo redatto dall’ufficio stampa
+per informare su un fatto oppure su un avvenimento in maniera ufficiale
+(testo, immagini, allegati)</p>
+<p><strong>Spedizione</strong>: L’atto di inviare un comunicato stampa a
+una lista di giornalisti</p>
+<p><strong>Lista/Mailing List</strong>: Insieme di contatti giornalisti
+selezionati per una spedizione</p>
+<p><strong>Media Kit</strong>: Insieme di allegati associati a un
+comunicato</p>
+<p><strong>Progetto</strong>: Contenitore che raggruppa comunicati e
+rassegna stampa per un cliente/campagna</p>
+<p><strong>Rassegna Stampa</strong>: Collezione di articoli pubblicati
+in risposta a comunicati</p>
+<p><strong>Word Cloud</strong>: Visualizzazione grafica delle parole più
+frequenti negli articoli di un giornalista</p>
+<p><strong>Bounce</strong>: Email non consegnata (indirizzo errato,
+casella piena, ecc.)</p>
+<p><strong>Friendliness</strong>: Indice di reattività di un giornalista
+ai comunicati ricevuti</p>
+<p><strong>Ospite</strong>: Tipo di utente con accesso limitato (solo
+visualizzazione progetti). È il cliente dell’ufficio stampa</p>
+<p><strong>To-Do</strong>: Task/attività da completare</p>
+<hr />
+<h2 id="overview-del-progetto">2. Overview del Progetto</h2>
+<h3 id="descrizione-generale">2.1 Descrizione Generale</h3>
+<p>MediaContacts è una web application responsive progettata per
+semplificare e ottimizzare il lavoro degli uffici stampa, comunicatori e
+professionisti delle PR nella creazione e gestione di liste di contatti
+giornalistici e nell’invio di comunicati stampa.</p>
+<h3 id="obiettivo-principale">2.2 Obiettivo Principale</h3>
+<p>Permettere agli utenti di creare liste mirate di giornalisti
+attingendo da un database professionale costantemente aggiornato, e
+gestire l’invio di comunicati stampa con funzionalità anti-spam e
+tracking avanzato.</p>
+<h3 id="utenti-target">2.3 Utenti Target</h3>
+<ul>
+<li>Addetti all’ufficio stampa</li>
+<li>Comunicatori</li>
+<li>Professionisti delle PR</li>
+<li>Agenzie di comunicazione</li>
+</ul>
+<h3 id="mercato-di-riferimento">2.4 Mercato di Riferimento</h3>
+<p>Italia (fase iniziale), con database che copre anche Francia e
+Spagna.</p>
+<hr />
+<h2 id="tipologie-di-utenti-e-permessi">3. Tipologie di Utenti e
+Permessi</h2>
+<h3 id="amministratore">3.1 Amministratore</h3>
+<p><strong>Capacità:</strong></p>
+<ul>
+<li>Creazione e gestione di nuovi utenti</li>
+<li>Creazione di liste visibili/non visibili a tutti gli utenti</li>
+<li>Creazione di liste modificabili/non modificabili</li>
+</ul>
+<p><strong>Limitazioni:</strong></p>
+<ul>
+<li>Non può impostare limiti specifici per singolo utente</li>
+<li>Non vede i to-do personali degli altri utenti</li>
+</ul>
+<h3 id="utente-standard">3.2 Utente Standard</h3>
+<p><strong>Capacità:</strong></p>
+<ul>
+<li>Creazione e gestione delle proprie liste</li>
+<li>Consultazione del database giornalisti</li>
+<li>Creazione, modifica e invio di comunicati</li>
+<li>Gestione progetti</li>
+<li>Visualizzazione statistiche dei propri invii</li>
+<li>Creazione e gestione to-do personali</li>
+<li>Import di liste personali (che rimangono private)</li>
+<li>Export di liste</li>
+</ul>
+<p><strong>Limitazioni:</strong></p>
+<ul>
+<li>Non può vedere tutte le liste create da altri utenti</li>
+<li>Tutti gli utenti standard hanno lo stesso livello di permessi</li>
+</ul>
+<h3 id="ospite-cliente">3.3 Ospite (Cliente)</h3>
+<p><strong>Capacità:</strong></p>
+<ul>
+<li>Visualizzazione dei progetti a lui assegnati</li>
+<li>Consultazione dei comunicati inviati nel progetto</li>
+<li>Visualizzazione della rassegna stampa collegata</li>
+</ul>
+<p><strong>Limitazioni:</strong></p>
+<ul>
+<li>Solo visualizzazione (sola lettura)</li>
+<li>Nessuna possibilità di modificare, commentare o approvare</li>
+<li>Accesso limitato solo ai progetti specificamente assegnati</li>
+</ul>
+<h3 id="gestione-account">3.4 Gestione Account</h3>
+<ul>
+<li>Registrazione utente standard e ospite: non autonoma, solo tramite
+creazione da parte dell’amministratore via back office</li>
+<li>Credenziali: rilasciate dall’azienda all’amministratore</li>
+<li>Multi-account: un utente non può appartenere a più
+organizzazioni</li>
+<li>Autenticazione a due fattori: non prevista nella versione
+iniziale</li>
+<li>Creazione utenti: l’amministratore crea utenti tramite pannello di
+controllo fornendo email e password</li>
+</ul>
+<hr />
+<h2 id="funzionalità-principali">4. Funzionalità Principali</h2>
+<h3 id="priorità-assoluta">4.1 Priorità Assoluta</h3>
+<ol type="1">
+<li><p><strong>Creazione di mailing list con filtri
+avanzati</strong></p>
+<ul>
+<li>Filtraggio secondo criteri multipli</li>
+<li>Ricerca tramite stringhe di testo</li>
+<li>Sistema di filtri combinabili</li>
+</ul></li>
+<li><p><strong>Invio di comunicati tramite piattaforma</strong></p>
+<ul>
+<li>Sistema anti-spam integrato</li>
+<li>Garanzia di deliverability superiore rispetto a invii da account
+personali</li>
+</ul></li>
+<li><p><strong>Creazione di comunicati</strong></p>
+<ul>
+<li>Editor interno per creare comunicati</li>
+<li>Possibilità di caricare comunicati esterni (PDF)</li>
+</ul></li>
+</ol>
+<h3 id="funzionalità-essenziali-aggiuntive">4.2 Funzionalità Essenziali
+Aggiuntive</h3>
+<ul>
+<li>Gestione e riutilizzo di liste precedenti</li>
+<li>Tracking e statistiche degli invii</li>
+<li>Gestione progetti per clienti</li>
+</ul>
+<hr />
+<h2 id="gestione-database-giornalisti">5. Gestione Database
+Giornalisti</h2>
+<h3 id="struttura-dati-giornalista">5.1 Struttura Dati Giornalista</h3>
+<p><strong>Informazioni principali:</strong></p>
+<ul>
+<li>Nome e cognome</li>
+<li>Redazione di appartenenza</li>
+<li>Testata giornalistica</li>
+<li>Argomento/i di cui scrive</li>
+<li>Ruolo nella redazione</li>
+</ul>
+<p><strong>Contatti:</strong></p>
+<ul>
+<li>Email diretta</li>
+<li>Telefono diretto</li>
+<li>Telefono di redazione</li>
+<li>Indirizzo fisico</li>
+<li>Social network (tutti i profili)</li>
+</ul>
+<p><strong>Dati analitici:</strong></p>
+<ul>
+<li>Word cloud</li>
+<li>Lista articoli scritti</li>
+<li>Storico comunicati ricevuti</li>
+<li>Numero di articoli scritti basati su comunicati ricevuti (indice di
+“friendliness”)</li>
+</ul>
+<p><strong>Note e personalizzazione:</strong></p>
+<ul>
+<li>Note personali private inserite dall’utente</li>
+</ul>
+<h3 id="relazioni-tra-entità">5.2 Relazioni tra Entità</h3>
+<p><strong>Giornalista ↔︎ Testata ↔︎ Redazione:</strong></p>
+<ul>
+<li>Un giornalista appartiene a una redazione</li>
+<li>Un giornalista scrive per una testata</li>
+<li>Una redazione può avere più testate</li>
+<li>Una testata può avere più redazioni</li>
+<li>La relazione non è gerarchica ma complessa e molti-a-molti</li>
+</ul>
+<h3 id="ruoli-giornalisti">5.3 Ruoli Giornalisti</h3>
+<ul>
+<li>Aggiunto al direttore</li>
+<li>Art director</li>
+<li>Assistente</li>
+<li>Assistente programmi</li>
+<li>Autore</li>
+<li>Blogger</li>
+<li>Capo area</li>
+<li>Capo cronista</li>
+<li>Capo redattore</li>
+<li>Capo redattore centrale</li>
+<li>Capo servizio</li>
+<li>Collaboratore</li>
+<li>Comitato di redazione</li>
+<li>Comitato direttivo</li>
+<li>Comitato editoriale</li>
+<li>Comitato scientifico</li>
+<li>Condirettore</li>
+<li>Conduttore</li>
+<li>Consulente editoriale</li>
+<li>Contributor</li>
+<li>Coordinamento editoriale</li>
+<li>Corrispondente</li>
+<li>Curatore</li>
+<li>Direttore</li>
+<li>Direttore editoriale</li>
+<li>Direttore politico</li>
+<li>Direttore programmi</li>
+<li>Direttore responsabile</li>
+<li>Direttore rete</li>
+<li>Direttore scientifico</li>
+<li>Direttore sede regionale</li>
+<li>Direttore tecnico</li>
+<li>Editorialista</li>
+<li>Inviato</li>
+<li>Inviato estero</li>
+<li>Praticante</li>
+<li>Produttore esecutivo</li>
+<li>Programmista</li>
+<li>Regista</li>
+<li>Redattore esperto</li>
+<li>Regia</li>
+<li>Responsabile programmi</li>
+<li>Responsabile redazione</li>
+<li>Segreteria di direzione</li>
+<li>Vaticanista</li>
+<li>Vice capo redattore</li>
+<li>Vice capo servizio</li>
+<li>Vice capo redattore centrale</li>
+<li>Web editor</li>
+</ul>
+<h3 id="argomenti-e-categorie">5.4 Argomenti e Categorie</h3>
+<p><strong>Agricoltura</strong></p>
+<ul>
+<li>Agricoltura biologica</li>
+<li>Agroalimentare</li>
+<li>Foreste</li>
+</ul>
+<p><strong>Alimentari</strong></p>
+<ul>
+<li>Alimentazione</li>
+<li>Alimenti di produzione biologica</li>
+<li>Bevande</li>
+</ul>
+<p><strong>Ambiente</strong></p>
+<ul>
+<li>Cambiamento climatico</li>
+<li>Ecologia</li>
+<li>Inquinamento</li>
+<li>Territorio</li>
+</ul>
+<p><strong>Amministrazione e servizi pubblici</strong></p>
+<ul>
+<li>Amministrazione pubblica</li>
+<li>Biblioteche</li>
+<li>Lavori pubblici</li>
+</ul>
+<p><strong>Architettura</strong></p>
+<ul>
+<li>Architettura del paesaggio</li>
+<li>Bioarchitettura</li>
+<li>Ingegneria civile</li>
+</ul>
+<p><strong>Arredamento</strong></p>
+<ul>
+<li>Arredo urbano</li>
+<li>Design</li>
+<li>Forniture</li>
+<li>Modernariato</li>
+</ul>
+<p><strong>Arte e cultura</strong></p>
+<ul>
+<li>Arte contemporanea</li>
+<li>Cultura</li>
+<li>Disegno</li>
+<li>Filosofia</li>
+<li>Poesia</li>
+<li>Storia</li>
+</ul>
+<p><strong>Attualità</strong></p>
+<ul>
+<li>Annunci economici</li>
+<li>Attualità</li>
+<li>Informazioni regionali</li>
+<li>Cronaca nera</li>
+<li>Cronaca locale</li>
+<li>News</li>
+<li>Inchieste</li>
+</ul>
+<p><strong>Automazione e strumentazione</strong></p>
+<ul>
+<li>Misurazioni e strumenti</li>
+<li>Robotica</li>
+</ul>
+<p><strong>Chimica</strong></p>
+<ul>
+<li>Biochimica</li>
+<li>Farmaceutica</li>
+</ul>
+<p><strong>Commercio</strong></p>
+<ul>
+<li>Beni di consumo</li>
+<li>Commercio internazionale</li>
+<li>Grande distribuzione</li>
+</ul>
+<p><strong>Cosmesi</strong></p>
+<ul>
+<li>Bellezza</li>
+<li>Cura dei capelli</li>
+<li>Medicina estetica</li>
+</ul>
+<p><strong>Economia e finanza</strong></p>
+<ul>
+<li>Banca</li>
+<li>Borsa</li>
+<li>Buoni del tesoro</li>
+<li>Economia</li>
+<li>Euromercati</li>
+<li>Finanza</li>
+<li>Materie prime</li>
+<li>Mercato azionario</li>
+</ul>
+<p><strong>Edilizia</strong></p>
+<ul>
+<li>Materiali</li>
+<li>Serramenti</li>
+<li>Tecnologia delle costruzioni</li>
+</ul>
+<p><strong>Energia</strong></p>
+<ul>
+<li>Energie rinnovabili</li>
+<li>Gas</li>
+<li>Ingegneria petrolifera</li>
+</ul>
+<p><strong>Fotografia</strong></p>
+<ul>
+<li>Ottica</li>
+<li>Fotografia digitale</li>
+</ul>
+<p><strong>Gestione e logistica materiali</strong></p>
+<ul>
+<li>Refrigerazione</li>
+<li>Immagazzinaggio</li>
+<li>Imballaggio</li>
+</ul>
+<p><strong>Elettronica</strong></p>
+<ul>
+<li>Video</li>
+<li>Elettronica</li>
+<li>Hi-fi</li>
+</ul>
+<p><strong>Hobby e tempo libero</strong></p>
+<ul>
+<li>Animali</li>
+<li>Armi</li>
+<li>Giochi</li>
+<li>Giardinaggio</li>
+<li>Fumetti</li>
+<li>Fantascienza</li>
+<li>Modellismo</li>
+</ul>
+<p><strong>Impiantistica</strong></p>
+<ul>
+<li>Macchinari</li>
+<li>Macchine utensili</li>
+<li>Meccanica</li>
+<li>Meccanizzazione agricola</li>
+</ul>
+<p><strong>Imprese e industria</strong></p>
+<ul>
+<li>Esportazione</li>
+<li>Industria</li>
+<li>Imprese</li>
+<li>Metallurgia</li>
+<li>Produzione</li>
+</ul>
+<p><strong>Informatica</strong></p>
+<ul>
+<li>App</li>
+<li>Hardware informatico</li>
+<li>Videogames</li>
+<li>Multimedialità</li>
+<li>Sicurezza dei sistemi</li>
+<li>Software</li>
+<li>Web design</li>
+</ul>
+<p><strong>Lavoro</strong></p>
+<ul>
+<li>Previdenza</li>
+<li>Telelavoro</li>
+<li>Mercato del lavoro</li>
+</ul>
+<p><strong>Legge</strong></p>
+<ul>
+<li>Fisco</li>
+<li>Tributi</li>
+<li>Diritto</li>
+</ul>
+<p><strong>Organizzazione aziendale</strong></p>
+<ul>
+<li>Management</li>
+<li>Risorse umane</li>
+<li>Organizzazione aziendale</li>
+</ul>
+<p><strong>Medicina, salute e benessere</strong></p>
+<ul>
+<li>Cardiologia</li>
+<li>Chirurgia</li>
+<li>Dermatologia</li>
+<li>Dietetica</li>
+<li>Erboristeria</li>
+<li>Farmacia</li>
+<li>Fitness</li>
+<li>Medicina generale</li>
+<li>Neuroscienze</li>
+<li>Omeopatia</li>
+<li>Pedagogia</li>
+<li>Sanità</li>
+<li>Salute</li>
+<li>Terme</li>
+</ul>
+<p><strong>Moda</strong></p>
+<ul>
+<li>Accessori</li>
+<li>Alta moda</li>
+<li>Lifestyle</li>
+<li>Moda luxury</li>
+<li>Moda business</li>
+<li>Moda bimbi</li>
+<li>Tessile moda</li>
+</ul>
+<p><strong>Motori</strong></p>
+<ul>
+<li>Moto</li>
+<li>Veicoli elettrici</li>
+<li>Camper</li>
+<li>Caravan</li>
+</ul>
+<p><strong>Musica</strong></p>
+<ul>
+<li>Dischi</li>
+<li>Musica leggera</li>
+<li>Musica jazz</li>
+<li>Musica varia</li>
+</ul>
+<p><strong>Politica</strong></p>
+<ul>
+<li>Interni</li>
+<li>Geopolitica</li>
+<li>Politica interna</li>
+<li>Politica economica</li>
+<li>Vaticano</li>
+</ul>
+<p><strong>Pubblicità, marketing e comunicazione</strong></p>
+<ul>
+<li>Advertising</li>
+<li>Comunicazione</li>
+<li>Media</li>
+</ul>
+<p><strong>Radio/TV e video</strong></p>
+<ul>
+<li>Video</li>
+<li>Programmi radio</li>
+</ul>
+<p><strong>Ristorazione</strong></p>
+<ul>
+<li>Alberghi</li>
+<li>Hotel</li>
+<li>Bar</li>
+<li>Catering</li>
+<li>Ristorazione</li>
+</ul>
+<p><strong>Scienze</strong></p>
+<ul>
+<li>Astronomia</li>
+<li>Aerospazio</li>
+<li>Fisica</li>
+<li>Geologia</li>
+<li>Scienza</li>
+<li>Matematica</li>
+<li>Innovazione</li>
+<li>Statistica</li>
+</ul>
+<p><strong>Sicurezza</strong></p>
+<ul>
+<li>Prevenzione del crimine</li>
+<li>Sicurezza stradale</li>
+<li>Sicurezza sul lavoro</li>
+</ul>
+<p><strong>Società</strong></p>
+<ul>
+<li>Mafia</li>
+<li>Giovani</li>
+<li>Famiglia</li>
+<li>Costume</li>
+<li>Astrologia</li>
+<li>Società</li>
+<li>Scuola</li>
+<li>Satira</li>
+<li>Terzo mondo</li>
+</ul>
+<p><strong>Spettacoli</strong></p>
+<ul>
+<li>Cinema</li>
+<li>Spettacoli</li>
+<li>Danza</li>
+</ul>
+<p><strong>Sport</strong></p>
+<ul>
+<li>Arti marziali</li>
+<li>Baseball</li>
+<li>Equitazione</li>
+<li>Olimpiadi</li>
+<li>Pallacanestro</li>
+<li>Trekking</li>
+<li>Tennis</li>
+</ul>
+<p><strong>Telecomunicazioni</strong></p>
+<ul>
+<li>Telefonia</li>
+<li>Telecomunicazioni varie</li>
+</ul>
+<p><strong>Trasporto</strong></p>
+<ul>
+<li>Trasporto marittimo</li>
+<li>Trasporto pubblico</li>
+<li>Trasporto ferroviario</li>
+<li>Viabilità</li>
+</ul>
+<p><strong>Turismo</strong></p>
+<ul>
+<li>Fiere</li>
+<li>Camping</li>
+<li>Agriturismo</li>
+</ul>
+<h3 id="criteri-di-filtro-giornalisti">5.5 Criteri di Filtro
+Giornalisti</h3>
+<p>Gli utenti possono filtrare i giornalisti secondo:</p>
+<ul>
+<li><strong>Argomento</strong>: categoria/sottocategoria di
+interesse</li>
+<li><strong>Testata giornalistica</strong>: nome della testata</li>
+<li><strong>Sede del giornalista</strong>: ubicazione del
+giornalista</li>
+<li><strong>Frequenza di pubblicazione</strong>: della testata
+(quotidiano, quindicinale, trisettimanale, bisettimanale, mensile, oltre
+al mese, settimanale)</li>
+<li><strong>Diffusione territoriale</strong>: ambito geografico della
+testata</li>
+<li><strong>Ruolo del giornalista</strong>: posizione nella
+redazione</li>
+<li><strong>Tipo di media</strong>: agenzia stampa, carta stampata,
+online, radio, TV</li>
+<li><strong>Ricerca testuale</strong>: stringhe di testo libero</li>
+</ul>
+<p><strong>Caratteristiche filtri:</strong></p>
+<ul>
+<li>Tutti i filtri sono combinabili tra loro</li>
+<li>Gli utenti possono salvare combinazioni di filtri per
+riutilizzarle</li>
+<li>Per escludere elementi specifici: selezionare tutti tranne quello da
+escludere</li>
+</ul>
+<h3 id="ricerca-giornalisti">5.6 Ricerca Giornalisti</h3>
+<p><strong>Campi visualizzati nei risultati:</strong></p>
+<ul>
+<li>Nome e cognome</li>
+<li>Ruolo</li>
+<li>Indirizzo email</li>
+<li>Numero di telefono</li>
+<li>Argomento/i</li>
+<li>Testata</li>
+</ul>
+<p><strong>Modalità di selezione:</strong></p>
+<ul>
+<li>Selezione singola</li>
+<li>Selezione multipla</li>
+<li>Aggiunta di tutti i risultati filtrati</li>
+</ul>
+<h3 id="word-cloud">5.7 Word Cloud</h3>
+<p><strong>Caratteristiche:</strong></p>
+<ul>
+<li>Generata dagli articoli del giornalista</li>
+<li>Parole dimensionate in base alla frequenza di utilizzo</li>
+<li>Scopo: comprendere rapidamente i temi trattati dal giornalista</li>
+</ul>
+<p><strong>Aggiornamento:</strong></p>
+<ul>
+<li>Basata su articoli recenti (orizzonte temporale specifico)</li>
+<li>Aggiornamento ogni ~5 nuovi articoli disponibili</li>
+<li>Fonte dati: piattaforma di rassegna stampa integrata</li>
+</ul>
+<h3 id="aggiornamento-database">5.8 Aggiornamento Database</h3>
+<p><strong>Frequenza:</strong></p>
+<ul>
+<li>Aggiornamento quotidiano dei dati giornalisti/redazioni/testate</li>
+<li>Gestito dall’azienda fornitrice della piattaforma</li>
+</ul>
+<p><strong>Visibilità aggiornamenti:</strong></p>
+<ul>
+<li>Gli utenti devono vedere quali dati sono stati recentemente
+aggiornati</li>
+<li>Scopo: evidenziare l’importanza di avere dati sempre freschi</li>
+<li>Messaggio implicito: le liste esportate diventano obsolete nel
+tempo</li>
+</ul>
+<p><strong>Interazione utenti con database:</strong></p>
+<ul>
+<li>Segnalazione errori/dati obsoleti</li>
+<li>Richiesta aggiunta di giornalisti non presenti</li>
+<li>Sistema di segnalazione integrato nell’applicazione</li>
+</ul>
+<h3 id="gestione-duplicati">5.9 Gestione Duplicati</h3>
+<p><strong>Durante aggiunta manuale:</strong></p>
+<ul>
+<li>Sistema di alert per potenziali duplicati</li>
+<li>Basato su logica di matching (es. stesso nome + email simile)</li>
+<li>Avviso: “possibile duplicato rilevato”</li>
+<li>Decisione finale all’utente</li>
+</ul>
+<hr />
+<h2 id="gestione-testate-giornalistiche">6. Gestione Testate
+Giornalistiche</h2>
+<h3 id="informazioni-testata">6.1 Informazioni Testata</h3>
+<p><strong>Dati principali:</strong></p>
+<ul>
+<li>Nome testata</li>
+<li>Tipo di media (supplemento, quotidiano, etc.)</li>
+<li>Frequenza di pubblicazione (settimanale, mensile, etc.)</li>
+<li>Argomento principale</li>
+</ul>
+<p><strong>Contatti:</strong></p>
+<ul>
+<li>Telefono</li>
+<li>Email</li>
+<li>Indirizzo fisico</li>
+<li>Sito web</li>
+<li>Social network</li>
+</ul>
+<p><strong>Relazioni:</strong></p>
+<ul>
+<li>Lista giornalisti della testata</li>
+<li>Testate collegate</li>
+</ul>
+<p><strong>Dati pubblicitari:</strong></p>
+<ul>
+<li>Concessionario pubblicità</li>
+<li>Indirizzo concessione pubblicità</li>
+</ul>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Note personali dell’utente</li>
+</ul>
+<h3 id="tipo-di-media">6.2 Tipo di Media</h3>
+<p>Categorie disponibili:</p>
+<ul>
+<li>Agenzia stampa</li>
+<li>Carta stampata</li>
+<li>Online</li>
+<li>Radio</li>
+<li>TV</li>
+</ul>
+<h3 id="contatti-redazione">6.3 Contatti Redazione</h3>
+<ul>
+<li>Contatti generici di redazione (email generale, centralino)</li>
+<li>Elenco dettagliato giornalisti con contatti individuali</li>
+</ul>
+<hr />
+<h2 id="gestione-liste">7. Gestione Liste</h2>
+<h3 id="creazione-liste">7.1 Creazione Liste</h3>
+<p><strong>Modalità di creazione:</strong></p>
+<ol type="1">
+<li><p><strong>Da zero con filtri manuali</strong></p>
+<ul>
+<li>Applicazione filtri combinati</li>
+<li>Visualizzazione risultati</li>
+<li>Selezione giornalisti</li>
+</ul></li>
+<li><p><strong>Con assistenza AI (chat in linguaggio
+naturale)</strong></p>
+<ul>
+<li>Descrizione criteri in linguaggio naturale</li>
+<li>AI genera la lista secondo i criteri espressi</li>
+<li>Coesistenza con sistema filtri tradizionale</li>
+</ul></li>
+<li><p><strong>Da liste precedenti</strong></p>
+<ul>
+<li>Riutilizzo completo di liste esistenti</li>
+<li>Riutilizzo parziale (selezione giornalisti da liste esistenti)</li>
+</ul></li>
+<li><p><strong>Duplicazione</strong></p>
+<ul>
+<li>Possibilità di duplicare liste esistenti come base per nuove
+liste</li>
+</ul></li>
+</ol>
+<h3 id="modifica-liste">7.2 Modifica Liste</h3>
+<p><strong>Operazioni possibili:</strong></p>
+<ul>
+<li>Aggiunta singola di giornalisti</li>
+<li>Aggiunta multipla di giornalisti</li>
+<li>Rimozione di giornalisti</li>
+<li>Modifica manuale in qualsiasi momento</li>
+</ul>
+<p><strong>Tracciamento:</strong></p>
+<ul>
+<li>Data ultima modifica della lista</li>
+<li>Autore/creatore della lista</li>
+</ul>
+<p><strong>Cronologia:</strong></p>
+<ul>
+<li>Non viene mantenuta cronologia completa delle modifiche</li>
+<li>Non viene tracciato chi ha modificato (solo chi ha creato)</li>
+</ul>
+<h3 id="salvataggio-e-organizzazione">7.3 Salvataggio e
+Organizzazione</h3>
+<p><strong>Attributi lista:</strong></p>
+<ul>
+<li>Nome obbligatorio</li>
+<li>Descrizione/note opzionali</li>
+<li>Data creazione</li>
+<li>Autore</li>
+</ul>
+<p><strong>Struttura organizzativa:</strong></p>
+<ul>
+<li>Tutte le liste allo stesso livello (no cartelle)</li>
+<li>No sistema di tag/etichette (da valutare in futuro)</li>
+</ul>
+<h3 id="condivisione-e-visibilità">7.4 Condivisione e Visibilità</h3>
+<p><strong>Livello amministratore:</strong></p>
+<ul>
+<li>Può creare liste visibili a tutti o private</li>
+<li>Può creare liste modificabili o in sola lettura</li>
+<li>Ha accesso a tutte le liste</li>
+</ul>
+<p><strong>Livello utente:</strong></p>
+<ul>
+<li>Non può creare liste completamente private (visibili solo a
+lui)</li>
+<li>Da decidere: se può creare liste che altri non possono
+modificare</li>
+<li>Vede le liste condivise dall’admin e dai colleghi (secondo
+permessi)</li>
+</ul>
+<p><strong>Condivisione esterna:</strong></p>
+<ul>
+<li>Non prevista tramite link</li>
+<li>Solo tramite export</li>
+</ul>
+<h3 id="cancellazione">7.5 Cancellazione</h3>
+<ul>
+<li>Le liste eliminate sono cancellate definitivamente</li>
+<li>Nessun cestino o recupero possibile</li>
+<li>Richiesta attenzione all’utente prima della cancellazione</li>
+</ul>
+<h3 id="limiti">7.6 Limiti</h3>
+<ul>
+<li>Nessun limite al numero di giornalisti per lista</li>
+</ul>
+<hr />
+<h2 id="importexport-liste">8. Import/Export Liste</h2>
+<h3 id="import">8.1 Import</h3>
+<p><strong>Formato:</strong></p>
+<ul>
+<li>File CSV</li>
+</ul>
+<p><strong>Processo:</strong></p>
+<ul>
+<li>Caricamento file CSV</li>
+<li>Mapping colonne CSV con campi database</li>
+<li>Importazione dati</li>
+</ul>
+<p><strong>Requisiti:</strong></p>
+<ul>
+<li>Nessun campo obbligatorio</li>
+<li>Migliore corrispondenza possibile tra colonne CSV e struttura
+dati</li>
+<li>Dati importati rimangono privati (non arricchiscono database
+comune)</li>
+</ul>
+<p><strong>Gestione duplicati:</strong></p>
+<ul>
+<li>Alert per potenziali duplicati durante import</li>
+</ul>
+<h3 id="export">8.2 Export</h3>
+<p><strong>Formato:</strong></p>
+<ul>
+<li>Excel</li>
+</ul>
+<p><strong>Contenuto:</strong></p>
+<ul>
+<li>Lista completa con tutti i dati dei giornalisti selezionati</li>
+</ul>
+<hr />
+<h2 id="gestione-comunicati">9. Gestione Comunicati</h2>
+<h3 id="creazione-comunicato">9.1 Creazione Comunicato</h3>
+<p><strong>Modalità:</strong></p>
+<ol type="1">
+<li><p><strong>Editor interno</strong></p>
+<ul>
+<li>Editor HTML per formattazione</li>
+<li>Standard minimo: capacità di costruire layout email</li>
+<li>Supporto per testo formattato, immagini, link</li>
+</ul></li>
+<li><p><strong>Caricamento esterno</strong></p>
+<ul>
+<li>Upload file (es. PDF)</li>
+</ul></li>
+</ol>
+<p><strong>Componenti comunicato:</strong></p>
+<ul>
+<li>Titolo del comunicato</li>
+<li>Corpo del messaggio (HTML)</li>
+<li>Media kit (allegati)</li>
+</ul>
+<h3 id="media-kit-e-allegati">9.2 Media Kit e Allegati</h3>
+<p><strong>Tipologie supportate:</strong></p>
+<ul>
+<li>PDF</li>
+<li>Immagini</li>
+<li>Altri file</li>
+</ul>
+<p><strong>Gestione:</strong></p>
+<ul>
+<li>Nessun limite di dimensione (da valutare)</li>
+<li>Possibilità di riutilizzare allegati da comunicati precedenti</li>
+<li>Libreria media centralizzata (da valutare implementazione)</li>
+</ul>
+<h3 id="template">9.3 Template</h3>
+<p><strong>Disponibilità:</strong></p>
+<ul>
+<li>Template preimpostati disponibili</li>
+<li>Template personalizzabili dall’utente/organizzazione</li>
+</ul>
+<h3 id="personalizzazione-e-branding">9.4 Personalizzazione e
+Branding</h3>
+<p><strong>Firma email:</strong></p>
+<ul>
+<li>Personalizzabile per utente o per organizzazione</li>
+<li>Inclusione logo</li>
+<li>Scelta colori</li>
+<li>Scelta font</li>
+<li>Layout firma customizzabile</li>
+</ul>
+<p><strong>Oggetto email:</strong></p>
+<ul>
+<li>Campo separato dal titolo del comunicato</li>
+<li>Possibilità di usare titolo o creare oggetto diverso</li>
+<li>Tipicamente coincidono ma deve esserci flessibilità</li>
+</ul>
+<h3 id="gestione-bozze">9.5 Gestione Bozze</h3>
+<p><strong>Salvataggio:</strong></p>
+<ul>
+<li>Comunicati salvabili come bozze</li>
+<li>Ripresi e modificati in qualsiasi momento</li>
+</ul>
+<p><strong>Eliminazione:</strong></p>
+<ul>
+<li>Solo le bozze possono essere eliminate</li>
+<li>Comunicati inviati non eliminabili (restano in storico)</li>
+</ul>
+<h3 id="duplicazione">9.6 Duplicazione</h3>
+<ul>
+<li>Possibilità di duplicare comunicati esistenti come punto di
+partenza</li>
+<li>Utile per comunicati simili o ricorrenti</li>
+</ul>
+<h3 id="versioni-multiple">9.7 Versioni Multiple</h3>
+<p><strong>Personalizzazione avanzata:</strong></p>
+<ul>
+<li>Creazione di versioni diverse dello stesso comunicato</li>
+<li>Per target/liste diverse</li>
+<li>Personalizzazione messaggi per singoli destinatari o gruppi</li>
+<li>Funzionalità distinta dalla semplice duplicazione</li>
+</ul>
+<h3 id="anteprima">9.8 Anteprima</h3>
+<p><strong>Funzionalità:</strong></p>
+<ul>
+<li>Anteprima multi-device (desktop/mobile)</li>
+<li>Visualizzazione prima dell’invio</li>
+<li>Verifica layout e formattazione</li>
+</ul>
+<hr />
+<h2 id="invio-comunicati-spedizioni">10. Invio Comunicati
+(Spedizioni)</h2>
+<h3 id="terminologia">10.1 Terminologia</h3>
+<p><strong>Importante:</strong> Distinzione tra:</p>
+<ul>
+<li><strong>Comunicato</strong>: il contenuto del messaggio</li>
+<li><strong>Spedizione/Invio</strong>: l’atto di inviare il comunicato a
+una lista</li>
+</ul>
+<h3 id="configurazione-invio">10.2 Configurazione Invio</h3>
+<p><strong>Parametri obbligatori:</strong></p>
+<ul>
+<li>Lista destinatari</li>
+<li>Comunicato da inviare</li>
+<li>Oggetto email</li>
+<li>Indirizzo mittente</li>
+</ul>
+<p><strong>Mittente:</strong></p>
+<ul>
+<li>Personalizzabile dall’utente</li>
+<li>Può essere qualsiasi indirizzo</li>
+<li>Le risposte arrivano all’indirizzo impostato come mittente</li>
+</ul>
+<p><strong>Reply-to:</strong></p>
+<ul>
+<li>Coincide con il mittente</li>
+<li>Risposte dei giornalisti arrivano all’indirizzo mittente</li>
+</ul>
+<h3 id="schermata-di-riepilogoconferma">10.3 Schermata di
+Riepilogo/Conferma</h3>
+<p>Prima dell’invio definitivo:</p>
+<ul>
+<li>Visualizzazione lista destinatari completa</li>
+<li>Oggetto email</li>
+<li>Mittente</li>
+<li>Anteprima comunicato</li>
+<li>Conferma esplicita richiesta</li>
+</ul>
+<h3 id="test-invio">10.4 Test Invio</h3>
+<p><strong>Funzionalità:</strong></p>
+<ul>
+<li>Invio di test prima della spedizione definitiva</li>
+<li>A se stessi o a indirizzi specifici</li>
+<li>Verifica deliverability e formattazione</li>
+</ul>
+<h3 id="modalità-di-invio">10.5 Modalità di Invio</h3>
+<p><strong>Tramite piattaforma (consigliato):</strong></p>
+<ul>
+<li>Sistema anti-spam integrato</li>
+<li>Maggiore garanzia di deliverability</li>
+<li>Nessun rischio di finire in spam</li>
+<li>Tracking completo</li>
+</ul>
+<p><strong>Tramite account personale:</strong></p>
+<ul>
+<li>Possibile ma non consigliato per liste numerose</li>
+<li>Maggior rischio spam</li>
+</ul>
+<h3 id="programmazione-invio">10.6 Programmazione Invio</h3>
+<p><strong>Scheduling:</strong></p>
+<ul>
+<li>Possibilità di programmare data e ora specifica</li>
+<li>Spedizioni programmate modificabili prima dell’esecuzione</li>
+<li>Spedizioni programmate cancellabili prima dell’esecuzione</li>
+</ul>
+<p><strong>Notifica:</strong></p>
+<ul>
+<li>Notifica quando spedizione programmata viene eseguita con
+successo</li>
+</ul>
+<h3 id="processo-di-invio">10.7 Processo di Invio</h3>
+<p><strong>Caratteristiche:</strong></p>
+<ul>
+<li>Invio a liste numerose (es. 2000 giornalisti) avviene nel tempo</li>
+<li>Non istantaneo per grandi quantità</li>
+<li>Notifica al completamento dell’invio</li>
+</ul>
+<p><strong>Interruzione:</strong></p>
+<ul>
+<li>Non è possibile interrompere un invio in corso (versione
+iniziale)</li>
+</ul>
+<h3 id="gestione-errori">10.8 Gestione Errori</h3>
+<p><strong>Monitoraggio:</strong></p>
+<ul>
+<li>Tracking indirizzi che non hanno ricevuto l’email</li>
+<li>Report errori di invio</li>
+</ul>
+<p><strong>Notifica errori:</strong></p>
+<ul>
+<li>Utente riceve report con:
+<ul>
+<li>Indirizzi falliti</li>
+<li>Motivo del fallimento (bounce)</li>
+<li>Riepilogo invio</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="statistiche-e-tracking">11. Statistiche e Tracking</h2>
+<h3 id="metriche-disponibili">11.1 Metriche Disponibili</h3>
+<p><strong>Metriche principali:</strong></p>
+<ul>
+<li>Aperture email</li>
+<li>Click sui link nel comunicato</li>
+<li>Bounce rate (email non consegnate)</li>
+<li>Unsubscribe (quando possibile)</li>
+<li>Tempo di lettura (quando possibile)</li>
+</ul>
+<h3 id="livello-di-dettaglio">11.2 Livello di Dettaglio</h3>
+<p><strong>Per singola spedizione:</strong></p>
+<ul>
+<li>Statistiche dettagliate per ogni invio</li>
+<li>Visualizzazione giornalista per giornalista</li>
+<li>Timeline delle interazioni</li>
+</ul>
+<p><strong>Nota importante:</strong></p>
+<ul>
+<li>Statistiche disponibili solo per singola spedizione</li>
+<li>Non esiste vista aggregata/comparativa (versione iniziale)</li>
+<li>Non è possibile confrontare performance di spedizioni diverse</li>
+</ul>
+<h3 id="export-statistiche">11.3 Export Statistiche</h3>
+<ul>
+<li>Non previsto nella versione iniziale</li>
+</ul>
+<h3 id="storico-contatti-giornalista">11.4 Storico Contatti
+Giornalista</h3>
+<p><strong>Nella scheda giornalista:</strong></p>
+<ul>
+<li>Numero di comunicati inviati a quel giornalista</li>
+<li>Numero di articoli scritti basati su comunicati ricevuti</li>
+<li>Indice di “friendliness” (quanto è reattivo ai comunicati)</li>
+<li>Informazione strategica per l’ufficio stampa</li>
+</ul>
+<hr />
+<h2 id="progetti-e-cliente-ospite">12. Progetti e Cliente Ospite</h2>
+<h3 id="struttura-progetto">12.1 Struttura Progetto</h3>
+<p><strong>Un progetto contiene:</strong></p>
+<ul>
+<li>Lista di comunicati inviati</li>
+<li>Rassegna stampa associata</li>
+<li>Articoli risultanti dai comunicati</li>
+</ul>
+<p><strong>Scopo:</strong></p>
+<ul>
+<li>Rendicontazione attività ufficio stampa</li>
+<li>Visibilità per il cliente finale</li>
+<li>Dimostrazione ROI delle attività PR</li>
+</ul>
+<h3 id="durata-progetti">12.2 Durata Progetti</h3>
+<ul>
+<li>Progetti aperti (nessuna durata predefinita)</li>
+<li>Non vincolati a periodi specifici</li>
+</ul>
+<h3 id="rassegna-stampa">12.3 Rassegna Stampa</h3>
+<p><strong>Composizione:</strong></p>
+<ul>
+<li>Articoli scritti da giornalisti che hanno ricevuto il
+comunicato</li>
+<li>Link agli articoli</li>
+<li>Data pubblicazione</li>
+<li>Autore articolo</li>
+</ul>
+<p><strong>Inserimento articoli:</strong></p>
+<ul>
+<li><strong>Automatico</strong>: da piattaforma di rassegna stampa
+integrata</li>
+<li><strong>Manuale</strong>: inserimento diretto da parte
+dell’utente</li>
+</ul>
+<p><strong>Matching automatico:</strong></p>
+<ul>
+<li>Sistema riconosce articoli correlati a comunicati (da approfondire
+meccanismo)</li>
+<li>Possibili criteri: citazioni, link, timing, analisi contenuto</li>
+</ul>
+<h3 id="accesso-ospite">12.4 Accesso Ospite</h3>
+<p><strong>Visualizzazione:</strong></p>
+<ul>
+<li>Solo progetti assegnati specificamente all’ospite</li>
+<li>Lista comunicati del progetto</li>
+<li>Rassegna stampa completa</li>
+</ul>
+<p><strong>Reportistica per ospite:</strong></p>
+<ul>
+<li>Comunicato X → Articoli risultanti (1, 2, 3, 4, 5…)</li>
+<li>Per ogni articolo: data, autore, link</li>
+<li>Metriche semplici: numero articoli, non reach/sentiment/valore
+pubblicitario equivalente</li>
+</ul>
+<p><strong>Limitazioni:</strong></p>
+<ul>
+<li>Solo visualizzazione (sola lettura)</li>
+<li>Nessun commento o interazione</li>
+<li>Nessuna approvazione/rifiuto</li>
+</ul>
+<hr />
+<h2 id="sistema-to-do">13. Sistema To-Do</h2>
+<h3 id="funzionalità-base">13.1 Funzionalità Base</h3>
+<p><strong>Creazione:</strong></p>
+<ul>
+<li>Utenti possono creare task personali</li>
+<li>Descrizione del to-do</li>
+<li>Data di scadenza (opzionale)</li>
+</ul>
+<p><strong>Visualizzazioni:</strong></p>
+<ol type="1">
+<li><strong>Lista</strong>: elenco semplice dei to-do</li>
+<li><strong>Agenda/Calendario</strong>: to-do organizzati per data
+<ul>
+<li>Non funziona come calendario tradizionale</li>
+<li>Visualizzazione a calendario per vedere distribuzione temporale
+to-do</li>
+</ul></li>
+</ol>
+<h3 id="collegamenti">13.2 Collegamenti</h3>
+<p><strong>Associazione:</strong></p>
+<ul>
+<li>To-do collegabili a progetti specifici</li>
+<li>Non collegabili a liste o comunicati (versione iniziale)</li>
+</ul>
+<h3 id="stati">13.3 Stati</h3>
+<p><strong>Stati disponibili:</strong></p>
+<ul>
+<li>Da fare</li>
+<li>Fatto/Completato</li>
+</ul>
+<p><strong>Nota:</strong> Non previsto stato “in corso”</p>
+<h3 id="assegnazione">13.4 Assegnazione</h3>
+<p><strong>Possibilità:</strong></p>
+<ul>
+<li>To-do assegnabili ad altri utenti dell’organizzazione</li>
+<li>Non solo personali</li>
+</ul>
+<p><strong>Visibilità:</strong></p>
+<ul>
+<li>Ogni utente vede solo i propri to-do</li>
+<li>Admin non vede to-do di tutti (da rivalutare se admin può
+assegnare)</li>
+</ul>
+<h3 id="notifiche">13.5 Notifiche</h3>
+<ul>
+<li>Nessuna notifica/reminder per scadenze to-do (versione
+iniziale)</li>
+</ul>
+<h3 id="utilizzo-per-onboarding">13.6 Utilizzo per Onboarding</h3>
+<p><strong>Idea per nuovo utente:</strong></p>
+<ul>
+<li>Schermata iniziale con pochi elementi (nessuna mail, lista,
+progetto)</li>
+<li>To-do preimpostati con primi step per utilizzare la piattaforma</li>
+<li>Guida contestuale attraverso task da completare</li>
+<li>Visualizzazione a calendario per pianificare apprendimento</li>
+</ul>
+<hr />
+<h2 id="integrazione-intelligenza-artificiale">14. Integrazione
+Intelligenza Artificiale</h2>
+<h3 id="creazione-liste-con-ai">14.1 Creazione Liste con AI</h3>
+<p><strong>Modalità conversazionale:</strong></p>
+<ul>
+<li>Chat simile a ChatGPT</li>
+<li>Descrizione criteri in linguaggio naturale</li>
+<li>AI genera lista secondo i criteri espressi</li>
+</ul>
+<p><strong>Esempio:</strong></p>
+<ul>
+<li>“Crea una lista di giornalisti che scrivono di tecnologia per
+testate nazionali con focus su intelligenza artificiale”</li>
+<li>AI interpreta e applica filtri automaticamente</li>
+</ul>
+<p><strong>Coesistenza:</strong></p>
+<ul>
+<li>Sistema AI coesiste con filtri manuali</li>
+<li>Utente sceglie modalità preferita</li>
+</ul>
+<h3 id="assistenza-creazione-comunicato">14.2 Assistenza Creazione
+Comunicato</h3>
+<p><strong>Funzionalità:</strong></p>
+<ul>
+<li>AI può aiutare nella scrittura del comunicato</li>
+<li>Suggerimenti di contenuto</li>
+<li>Ottimizzazione testo</li>
+</ul>
+<p><strong>Implementazione:</strong> da definire</p>
+<h3 id="suggerimenti-proattivi">14.3 Suggerimenti Proattivi</h3>
+<p><strong>AI suggerisce giornalisti:</strong></p>
+<ul>
+<li>Analizza liste create dall’utente</li>
+<li>Identifica nuovi giornalisti aggiunti al database</li>
+<li>Suggerisce giornalisti corrispondenti ai criteri delle liste
+esistenti</li>
+<li>Utile perché database si aggiorna continuamente</li>
+</ul>
+<p><strong>AI impara dalle scelte (da valutare):</strong></p>
+<ul>
+<li>Possibile apprendimento da pattern dell’utente</li>
+<li>“Vedo che selezioni spesso giornalisti di questo tipo…”</li>
+<li>Implementazione da definire</li>
+</ul>
+<h3 id="timing-ottimale-da-valutare">14.4 Timing Ottimale (da
+valutare)</h3>
+<p><strong>Suggerimento orario invio:</strong></p>
+<ul>
+<li>Basato su dati storici di apertura</li>
+<li>Identificazione momento migliore per inviare comunicato</li>
+<li>Funzionalità interessante da approfondire</li>
+</ul>
+<hr />
+<h2 id="sistema-notifiche">15. Sistema Notifiche</h2>
+<h3 id="tipologie-notifiche">15.1 Tipologie Notifiche</h3>
+<p><strong>Notifiche in-app:</strong></p>
+<p><strong>Spedizioni:</strong></p>
+<ul>
+<li>Spedizione completata con successo</li>
+<li>Spedizione programmata eseguita</li>
+<li>Errori durante spedizione</li>
+</ul>
+<p><strong>Database:</strong></p>
+<ul>
+<li>Nuovi giornalisti aggiunti</li>
+<li>Giornalisti esistenti modificati/aggiornati</li>
+<li>(Possibili) suggerimenti AI su nuovi contatti rilevanti</li>
+</ul>
+<p><strong>Priorità notifiche:</strong></p>
+<ul>
+<li>Focus su eventi importanti</li>
+<li>Spedizioni completate: priorità alta</li>
+<li>Aggiornamenti database: informativo</li>
+</ul>
+<h3 id="canali">15.2 Canali</h3>
+<p><strong>In-app:</strong></p>
+<ul>
+<li>Notifiche principali</li>
+<li>Centro notifiche interno</li>
+</ul>
+<p><strong>Email:</strong></p>
+<ul>
+<li>Non previsto nella versione iniziale (da valutare)</li>
+</ul>
+<hr />
+<h2 id="privacy-sicurezza-e-compliance">16. Privacy, Sicurezza e
+Compliance</h2>
+<h3 id="gdpr">16.1 GDPR</h3>
+<p><strong>Diritti giornalisti:</strong></p>
+<ul>
+<li>Richiesta cancellazione dati dal database</li>
+<li>Opt-out da comunicazioni</li>
+<li>Gestione consensi</li>
+</ul>
+<p><strong>Opt-out:</strong></p>
+<ul>
+<li>Giornalisti possono richiedere di non ricevere più comunicati</li>
+<li>Può essere specifico per organizzazione</li>
+<li>Sistema deve gestire liste di esclusione</li>
+</ul>
+<h3 id="log-attività">16.2 Log Attività</h3>
+<p><strong>Tracking per compliance:</strong></p>
+<ul>
+<li>Log di tutte le attività rilevanti</li>
+<li>Invii effettuati</li>
+<li>Accessi al sistema</li>
+<li>Modifiche significative</li>
+</ul>
+<p><strong>Retention:</strong></p>
+<ul>
+<li>Conservazione dati per fini di compliance</li>
+<li>Audit trail completo</li>
+</ul>
+<h3 id="sicurezza-account">16.3 Sicurezza Account</h3>
+<p><strong>Autenticazione:</strong></p>
+<ul>
+<li>Email e password</li>
+<li>No autenticazione a due fattori (versione iniziale)</li>
+</ul>
+<p><strong>Gestione password:</strong></p>
+<ul>
+<li>Creazione iniziale da admin</li>
+<li>Cambio password da utente</li>
+</ul>
+<hr />
+<h2 id="documentazione-e-supporto">17. Documentazione e Supporto</h2>
+<h3 id="sezione-aiuto">17.1 Sezione Aiuto</h3>
+<p><strong>Contenuto:</strong></p>
+<ul>
+<li>FAQ integrate nell’applicazione</li>
+<li>Casi d’uso comuni</li>
+<li>Guide passo-passo</li>
+<li>Risoluzione problemi tipici</li>
+</ul>
+<h3 id="onboarding">17.2 Onboarding</h3>
+<p><strong>Primo accesso:</strong></p>
+<ul>
+<li>Schermata semplificata (pochi elementi se nuovo utente)</li>
+<li>Possibile uso di to-do preimpostati per guidare l’apprendimento</li>
+<li>Alternative da valutare con il designer</li>
+</ul>
+<p><strong>Tutorial:</strong></p>
+<ul>
+<li>Non previsti tutorial invasivi/modali</li>
+<li>Preferenza per apprendimento contestuale</li>
+<li>Documentazione accessibile quando necessaria</li>
+</ul>
+<hr />
+<h2 id="aspetti-tecnici">18. Aspetti Tecnici</h2>
+<h3 id="stack-tecnologico">18.1 Stack Tecnologico</h3>
+<p><strong>Backend:</strong></p>
+<ul>
+<li>PHP</li>
+<li>Framework: Laravel</li>
+</ul>
+<p><strong>Frontend:</strong></p>
+<ul>
+<li>Angular</li>
+</ul>
+<p><strong>Database:</strong></p>
+<ul>
+<li>Da definire con team di sviluppo</li>
+</ul>
+<h3 id="architettura">18.2 Architettura</h3>
+<p><strong>Tipo applicazione:</strong></p>
+<ul>
+<li>Web application</li>
+<li>Responsive design</li>
+</ul>
+<h3 id="responsive-e-multi-device">18.3 Responsive e Multi-Device</h3>
+<p><strong>Desktop:</strong></p>
+<ul>
+<li>Funzionalità complete</li>
+<li>Interfaccia ottimizzata per workflow complessi</li>
+</ul>
+<p><strong>Mobile/Tablet:</strong></p>
+<ul>
+<li>Sotto un certo breakpoint (es. 500px)</li>
+<li>Funzionalità limitata a:
+<ul>
+<li>Ricerca singolo giornalista</li>
+<li>Ricerca singola testata</li>
+<li>Consultazione dati</li>
+</ul></li>
+</ul>
+<p><strong>Funzionalità solo desktop:</strong></p>
+<ul>
+<li>Creazione mailing list con filtri</li>
+<li>Utilizzo AI per creazione liste</li>
+<li>Invio comunicati</li>
+<li>Creazione comunicati</li>
+<li>Gestione progetti complessi</li>
+</ul>
+<h3 id="performance">18.4 Performance</h3>
+<p><strong>Aspettative:</strong></p>
+<ul>
+<li>Più veloce è meglio (standard web application moderne)</li>
+<li>Ricerche: responsive</li>
+<li>Filtri: tempi ragionevoli anche con query complesse</li>
+<li>Caricamento pagine: snappy</li>
+</ul>
+<h3 id="browser-support">18.5 Browser Support</h3>
+<ul>
+<li>Da definire (browser moderni standard)</li>
+</ul>
+<hr />
+<h2 id="integrazione-con-piattaforma-rassegna-stampa">19. Integrazione
+con Piattaforma Rassegna Stampa</h2>
+<h3 id="natura-integrazione">19.1 Natura Integrazione</h3>
+<p><strong>Sistemi separati:</strong></p>
+<ul>
+<li>Piattaforma ufficio stampa (MediaContacts)</li>
+<li>Piattaforma rassegna stampa (sistema esterno)</li>
+</ul>
+<p><strong>Connessione:</strong></p>
+<ul>
+<li>Integrazione API tra i due sistemi</li>
+<li>Dati sincronizzati</li>
+</ul>
+<h3 id="sincronizzazione">19.2 Sincronizzazione</h3>
+<p><strong>Modalità:</strong></p>
+<ul>
+<li>Tempo reale</li>
+<li>Nessuna sincronizzazione periodica manuale</li>
+<li>Utente non deve fare nulla</li>
+</ul>
+<p><strong>Visualizzazione:</strong></p>
+<ul>
+<li>Utente accede a pagina rassegna stampa</li>
+<li>Dati aggiornati automaticamente</li>
+<li>Trasparenza totale per l’utente</li>
+</ul>
+<h3 id="dati-condivisi">19.3 Dati Condivisi</h3>
+<p><strong>Da rassegna stampa a MediaContacts:</strong></p>
+<ul>
+<li>Articoli scritti dai giornalisti</li>
+<li>Contenuto articoli per word cloud</li>
+<li>Matching articoli-comunicati (quando rilevati)</li>
+<li>Timeline pubblicazioni</li>
+</ul>
+<hr />
+<h2 id="elementi-brand">20. Elementi Brand</h2>
+<h3 id="identità-visiva">20.1 Identità Visiva</h3>
+<p><strong>Elementi liberi:</strong></p>
+<ul>
+<li>Palette colori completa</li>
+<li>Typography</li>
+<li>Stile visivo generale</li>
+<li>Iconografia</li>
+</ul>
+<p><strong>Nota:</strong> Massima libertà al designer su scelte non
+vincolate</p>
+<h2 id="considerazioni-per-il-design">21. Considerazioni per il
+Design</h2>
+<h3 id="approccio-alle-specifiche">21.1 Approccio alle Specifiche</h3>
+<p><strong>Filosofia:</strong></p>
+<ul>
+<li>Questo documento definisce <strong>cosa</strong> deve fare il
+prodotto</li>
+<li>Non prescrive <strong>come</strong> implementare le funzionalità
+nell’interfaccia</li>
+<li>Libertà totale al designer su:
+<ul>
+<li>Architettura informativa</li>
+<li>Layout e composizione pagine</li>
+<li>Navigazione e gerarchia</li>
+<li>Pattern di interazione</li>
+<li>Dashboard e visualizzazioni dati</li>
+<li>Microinterazioni</li>
+</ul></li>
+</ul>
+<h3 id="funzionalità-vs.-implementazione">21.2 Funzionalità
+vs. Implementazione</h3>
+<p><strong>Esempi di decisioni delegate al designer:</strong></p>
+<ul>
+<li>Presenza/assenza di barra di ricerca globale</li>
+<li>Organizzazione sezioni/aree principali dell’applicazione</li>
+<li>Dashboard iniziale e cosa mostrare all’accesso</li>
+<li>Modalità di visualizzazione risultati durante filtri in tempo
+reale</li>
+<li>Posizionamento e priorità delle azioni frequenti</li>
+<li>Sistema di navigazione tra sezioni</li>
+</ul>
+<h3 id="complessità-da-gestire">21.3 Complessità da Gestire</h3>
+<p><strong>Sfide principali per il design:</strong></p>
+<ol type="1">
+<li><strong>Ricchezza dati</strong>: molte informazioni per
+giornalista/testata/lista</li>
+<li><strong>Filtri multipli combinabili</strong>: interfaccia filtri
+avanzati ma usabile</li>
+<li><strong>Doppia modalità</strong>: filtri tradizionali + AI chat</li>
+<li><strong>Multi-ruolo</strong>: differenze tra
+admin/utente/ospite</li>
+<li><strong>Workflow lunghi</strong>: dalla ricerca giornalisti
+all’invio comunicato</li>
+<li><strong>Statistiche dettagliate</strong>: presentazione dati
+tracking in modo chiaro</li>
+</ol>
+<h3 id="focus-su-usabilità">21.4 Focus su Usabilità</h3>
+<p><strong>Considerazioni importanti:</strong></p>
+<ul>
+<li>Target: professionisti con vari livelli di competenza tecnica</li>
+<li>Dimensioni uffici stampa: da 1 a 50 persone (tipicamente 2-4)</li>
+<li>Uso quotidiano intensivo</li>
+<li>Necessità di velocità nelle operazioni frequenti</li>
+<li>Importanza di non commettere errori (es. invii sbagliati)</li>
+</ul>
+<hr />
+<h2 id="flussi-utente-principali">22. Flussi Utente Principali</h2>
+<h3 id="flusso-creazione-e-invio-comunicato-completo">22.1 Flusso
+Creazione e Invio Comunicato (Completo)</h3>
+<ol type="1">
+<li>Ricerca/filtro giornalisti nel database</li>
+<li>Selezione giornalisti</li>
+<li>Creazione lista (salvataggio)</li>
+<li>Creazione comunicato (editor o upload)</li>
+<li>Configurazione invio (mittente, oggetto)</li>
+<li>Anteprima e verifica</li>
+<li>Test invio (opzionale)</li>
+<li>Conferma e invio definitivo (o programmazione)</li>
+<li>Monitoraggio invio in corso</li>
+<li>Visualizzazione statistiche</li>
+</ol>
+<h3 id="flusso-riutilizzo-liste-esistenti">22.2 Flusso Riutilizzo Liste
+Esistenti</h3>
+<ol type="1">
+<li>Accesso a liste salvate</li>
+<li>Selezione lista</li>
+<li>(Opzionale) Modifica/integrazione lista</li>
+<li>Creazione comunicato</li>
+<li>Prosegue come flusso principale da punto 5</li>
+</ol>
+<h3 id="flusso-con-ai">22.3 Flusso con AI</h3>
+<ol type="1">
+<li>Accesso modalità chat AI</li>
+<li>Descrizione criteri in linguaggio naturale</li>
+<li>AI genera lista</li>
+<li>Revisione e modifica lista (se necessario)</li>
+<li>Salvataggio lista</li>
+<li>Prosegue come flusso principale da punto 4</li>
+</ol>
+<h3 id="flusso-import-lista">22.4 Flusso Import Lista</h3>
+<ol type="1">
+<li>Caricamento file CSV</li>
+<li>Mapping campi</li>
+<li>Verifica duplicati</li>
+<li>Importazione</li>
+<li>Revisione lista importata</li>
+<li>Salvataggio</li>
+<li>Prosegue come flusso principale da punto 4</li>
+</ol>
+<h3 id="flusso-cliente-ospite">22.5 Flusso Cliente Ospite</h3>
+<ol type="1">
+<li>Accesso piattaforma (credenziali limitate)</li>
+<li>Visualizzazione progetti assegnati</li>
+<li>Selezione progetto</li>
+<li>Consultazione comunicati inviati</li>
+<li>Visualizzazione rassegna stampa</li>
+<li>(Solo lettura, nessuna azione possibile)</li>
+</ol>
+<hr />
+<h2 id="scenari-duso-tipici">23. Scenari d’Uso Tipici</h2>
+<h3 id="lancio-nuovo-prodotto">23.1 Lancio Nuovo Prodotto</h3>
+<p><strong>Attività:</strong></p>
+<ul>
+<li>Ricerca giornalisti settore specifico + generalisti economia</li>
+<li>Filtro per testate nazionali + principali verticali di settore</li>
+<li>Creazione lista mirata (~50-200 giornalisti)</li>
+<li>Preparazione comunicato con media kit (immagini prodotto, scheda
+tecnica)</li>
+<li>Invio programmato per orario strategico</li>
+<li>Monitoraggio aperture nelle prime ore</li>
+<li>Rassegna stampa articoli usciti</li>
+<li>Report al cliente tramite progetto</li>
+</ul>
+<h3 id="comunicato-ricorrente-es.-risultati-trimestrali">23.2 Comunicato
+Ricorrente (es. Risultati Trimestrali)</h3>
+<p><strong>Attività:</strong></p>
+<ul>
+<li>Riutilizzo lista “Finanza ed Economia” già salvata</li>
+<li>Verifica aggiornamenti giornalisti</li>
+<li>AI suggerisce nuovi contatti rilevanti aggiunti</li>
+<li>Duplicazione template comunicato trimestre precedente</li>
+<li>Aggiornamento dati e cifre</li>
+<li>Invio a lista consolidata</li>
+<li>Confronto performance con trimestri precedenti (funzione
+futura)</li>
+</ul>
+<h3 id="gestione-multi-cliente-agenzia">23.3 Gestione Multi-Cliente
+(Agenzia)</h3>
+<p><strong>Attività:</strong></p>
+<ul>
+<li>Progetti separati per ogni cliente</li>
+<li>Liste personalizzate per settore cliente</li>
+<li>Comunicati brandizzati per ogni cliente</li>
+<li>Accesso ospite per ogni cliente al proprio progetto</li>
+<li>Rassegna stampa dedicata per cliente</li>
+<li>To-do per gestire timeline multiple clienti</li>
+</ul>
+<h3 id="aggiornamento-lista-obsoleta">23.4 Aggiornamento Lista
+Obsoleta</h3>
+<p><strong>Attività:</strong></p>
+<ul>
+<li>Apertura lista creata 6 mesi fa</li>
+<li>Sistema evidenzia giornalisti con dati aggiornati di recente</li>
+<li>Revisione contatti (alcuni cambiati testata/ruolo)</li>
+<li>Rimozione contatti non più rilevanti</li>
+<li>AI suggerisce nuovi giornalisti corrispondenti ai criteri
+originali</li>
+<li>Salvataggio lista aggiornata</li>
+<li>Nuovo invio a lista refreshed</li>
+</ul>
+<hr />
+<h2 id="metriche-di-successo-suggerite">24. Metriche di Successo
+(Suggerite)</h2>
+<h3 id="metriche-prodotto">24.1 Metriche Prodotto</h3>
+<p><strong>Adozione:</strong></p>
+<ul>
+<li>Numero utenti attivi giornalmente/settimanalmente</li>
+<li>Tempo medio sessione</li>
+<li>Frequenza di ritorno</li>
+</ul>
+<p><strong>Utilizzo funzionalità:</strong></p>
+<ul>
+<li>% invii tramite piattaforma vs export</li>
+<li>Numero medio liste per utente</li>
+<li>Riutilizzo liste esistenti vs creazione nuove</li>
+<li>Adozione modalità AI vs filtri manuali</li>
+</ul>
+<p><strong>Performance:</strong></p>
+<ul>
+<li>Tempo medio creazione lista</li>
+<li>Tempo medio da creazione lista a invio</li>
+<li>Tasso di completamento workflow completo</li>
+</ul>
+<p><strong>Qualità:</strong></p>
+<ul>
+<li>Tasso apertura comunicati inviati</li>
+<li>Tasso risposta giornalisti</li>
+<li>Numero articoli risultanti per comunicato</li>
+</ul>
+<h3 id="metriche-business">24.2 Metriche Business</h3>
+<p><strong>Valore per utente:</strong></p>
+<ul>
+<li>Numero comunicati inviati per mese</li>
+<li>Dimensione media liste</li>
+<li>ROI comunicazione (articoli ottenuti vs effort)</li>
+</ul>
+<p><strong>Soddisfazione:</strong></p>
+<ul>
+<li>Net Promoter Score</li>
+<li>Retention rate</li>
+<li>Feedback qualitativi</li>
+</ul>
+<hr />
+<h2 id="roadmap-funzionalità-future-possibili">25. Roadmap Funzionalità
+Future (Possibili)</h2>
+<h3 id="breve-termine">25.1 Breve Termine</h3>
+<p><strong>Già menzionate come “da valutare”:</strong></p>
+<ul>
+<li>Sistema di tag per liste</li>
+<li>Confronto performance tra spedizioni diverse</li>
+<li>Export statistiche (PDF, Excel)</li>
+<li>Libreria media centralizzata</li>
+<li>Autenticazione a due fattori</li>
+<li>Dashboard aggregata con metriche complessive</li>
+<li>Flusso approvazione comunicati</li>
+<li>Interruzione invio in corso</li>
+</ul>
+<h3 id="medio-termine">25.2 Medio Termine</h3>
+<p><strong>Intelligenza Artificiale avanzata:</strong></p>
+<ul>
+<li>Apprendimento automatico da comportamento utente</li>
+<li>Suggerimenti timing ottimale invio</li>
+<li>Analisi sentiment rassegna stampa</li>
+<li>Generazione automatica comunicati</li>
+</ul>
+<p><strong>Collaborazione:</strong></p>
+<ul>
+<li>Commenti su liste/comunicati</li>
+<li>Workflow approvazione multi-livello</li>
+<li>Notifiche push mobile</li>
+<li>Chat interna team</li>
+</ul>
+<p><strong>Analytics:</strong></p>
+<ul>
+<li>Dashboard comparativa</li>
+<li>Report automatici</li>
+<li>Previsioni performance</li>
+<li>Benchmark settoriali</li>
+</ul>
+<h3 id="lungo-termine">25.3 Lungo Termine</h3>
+<p><strong>Espansione internazionale:</strong></p>
+<ul>
+<li>Supporto multilingua (Francia, Spagna)</li>
+<li>Database giornalisti europei completo</li>
+<li>Comunicati multilingua</li>
+</ul>
+<p><strong>Integrazioni:</strong></p>
+<ul>
+<li>CRM aziendali</li>
+<li>Social media management</li>
+<li>Piattaforme email marketing</li>
+<li>Sistemi di calendar scheduling</li>
+</ul>
+<p><strong>Automazione:</strong></p>
+<ul>
+<li>Invii automatici trigger-based</li>
+<li>Follow-up automatici</li>
+<li>Segmentazione dinamica liste</li>
+<li>A/B testing comunicati</li>
+</ul>
+</body>
+</html>
