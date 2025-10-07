@@ -58,7 +58,6 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Creazione e gestione di nuovi utenti
 - Creazione di liste visibili/non visibili a tutti gli utenti
 - Creazione di liste modificabili/non modificabili
-- Accesso a tutte le funzionalità della piattaforma
 
 **Limitazioni:**
 
@@ -99,7 +98,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ### 3.4 Gestione Account
 
-- Registrazione: non autonoma, solo tramite creazione da parte dell'amministratore via back office
+- Registrazione utente standard e ospite: non autonoma, solo tramite creazione da parte dell'amministratore via back office
 - Credenziali: rilasciate dall'azienda all'amministratore
 - Multi-account: un utente non può appartenere a più organizzazioni
 - Autenticazione a due fattori: non prevista nella versione iniziale
@@ -107,7 +106,7 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 ---
 
-## 4. Funzionalità Core (MVP)
+## 4. Funzionalità Principali
 
 ### 4.1 Priorità Assoluta
 
@@ -131,7 +130,6 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Gestione e riutilizzo di liste precedenti
 - Tracking e statistiche degli invii
 - Gestione progetti per clienti
-- Database giornalisti con ricerca avanzata
 
 ---
 
@@ -157,14 +155,14 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 
 **Dati analitici:**
 
-- Word cloud (parole chiave degli articoli, dimensione proporzionale alla frequenza)
+- Word cloud
 - Lista articoli scritti
 - Storico comunicati ricevuti
 - Numero di articoli scritti basati su comunicati ricevuti (indice di "friendliness")
 
 **Note e personalizzazione:**
 
-- Note personali private dell'utente
+- Note personali private inserite dall'utente
 
 ### 5.2 Relazioni tra Entità
 
@@ -176,19 +174,12 @@ Italia (fase iniziale), con database che copre anche Francia e Spagna.
 - Una testata può avere più redazioni
 - La relazione non è gerarchica ma complessa e molti-a-molti
 
-**Gerarchia interna redazione:**
-
-- Organigramma dal direttore responsabile al semplice redattore
-- Rappresentata attraverso i ruoli
-
 ### 5.3 Ruoli Giornalisti
 
-Lista ruoli (non esaustiva):
-
 - Aggiunto al direttore
-- Direttore
+- Art director
 - Assistente
-- Assistente ai programmi
+- Assistente programmi
 - Autore
 - Blogger
 - Capo area
@@ -198,14 +189,42 @@ Lista ruoli (non esaustiva):
 - Capo servizio
 - Collaboratore
 - Comitato di redazione
+- Comitato direttivo
+- Comitato editoriale
+- Comitato scientifico
+- Condirettore
 - Conduttore
+- Consulente editoriale
+- Contributor
+- Coordinamento editoriale
 - Corrispondente
-- Correttore
+- Curatore
+- Direttore
 - Direttore editoriale
 - Direttore politico
-- Direttore di rete
+- Direttore programmi
+- Direttore responsabile
+- Direttore rete
+- Direttore scientifico
+- Direttore sede regionale
 - Direttore tecnico
-- Altri
+- Editorialista
+- Inviato
+- Inviato estero
+- Praticante
+- Produttore esecutivo
+- Programmista
+- Regista
+- Redattore esperto
+- Regia
+- Responsabile programmi
+- Responsabile redazione
+- Segreteria di direzione
+- Vaticanista
+- Vice capo redattore
+- Vice capo servizio
+- Vice capo redattore centrale
+- Web editor
 
 ### 5.4 Argomenti e Categorie
 
